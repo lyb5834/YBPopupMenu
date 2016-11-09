@@ -184,7 +184,7 @@ UITableViewDataSource
         if (delegate) self.delegate = delegate;
         
         self.width = itemWidth;
-        self.height = titles.count * kButtonHeight + 2 * kArrowHeight;
+        self.height = (titles.count > 5 ? 5 * kButtonHeight : titles.count * kButtonHeight) + 2 * kArrowHeight;
         
         kArrowPosition = 0.5 * self.width - 0.5 * kArrowWidth;
         
@@ -201,7 +201,7 @@ UITableViewDataSource
         _contentView = [[UITableView alloc] initWithFrame: _mainView.bounds style:UITableViewStylePlain];
         _contentView.delegate = self;
         _contentView.dataSource= self;
-        _contentView.bounces = NO;
+        _contentView.bounces = titles.count > 5 ? YES : NO;
         _contentView.tableFooterView = [UIView new];
         _contentView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _contentView.height -= 2 * kArrowHeight;
@@ -292,6 +292,8 @@ UITableViewDataSource
         }else {
             cell.imageView.image = nil;
         }
+    }else {
+        cell.imageView.image = nil;
     }
     return cell;
 }
