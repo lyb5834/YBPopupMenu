@@ -14,6 +14,7 @@
 		0C8E6ECD1DD1A893009EEF02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C8E6ECC1DD1A893009EEF02 /* Assets.xcassets */; };
 		0C8E6ED01DD1A893009EEF02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C8E6ECE1DD1A893009EEF02 /* LaunchScreen.storyboard */; };
 		0C8E6EDB1DD1A893009EEF02 /* YBPopupMenuDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EDA1DD1A893009EEF02 /* YBPopupMenuDemoUITests.m */; };
+		0C8E6EE81DD1A8CF009EEF02 /* YBPopupMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EE71DD1A8CF009EEF02 /* YBPopupMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		0C8E6ED61DD1A893009EEF02 /* YBPopupMenuDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YBPopupMenuDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C8E6EDA1DD1A893009EEF02 /* YBPopupMenuDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBPopupMenuDemoUITests.m; sourceTree = "<group>"; };
 		0C8E6EDC1DD1A893009EEF02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0C8E6EE61DD1A8CF009EEF02 /* YBPopupMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBPopupMenu.h; sourceTree = "<group>"; };
+		0C8E6EE71DD1A8CF009EEF02 /* YBPopupMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBPopupMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,7 @@
 		0C8E6EBF1DD1A893009EEF02 /* YBPopupMenuDemo */ = {
 			isa = PBXGroup;
 			children = (
+				0C8E6EE51DD1A8C7009EEF02 /* YBPopupMenu */,
 				0C8E6EC31DD1A893009EEF02 /* AppDelegate.h */,
 				0C8E6EC41DD1A893009EEF02 /* AppDelegate.m */,
 				0C8E6EC61DD1A893009EEF02 /* ViewController.h */,
@@ -109,6 +113,15 @@
 				0C8E6EDC1DD1A893009EEF02 /* Info.plist */,
 			);
 			path = YBPopupMenuDemoUITests;
+			sourceTree = "<group>";
+		};
+		0C8E6EE51DD1A8C7009EEF02 /* YBPopupMenu */ = {
+			isa = PBXGroup;
+			children = (
+				0C8E6EE61DD1A8CF009EEF02 /* YBPopupMenu.h */,
+				0C8E6EE71DD1A8CF009EEF02 /* YBPopupMenu.m */,
+			);
+			path = YBPopupMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C8E6EE81DD1A8CF009EEF02 /* YBPopupMenu.m in Sources */,
 				0C8E6EC81DD1A893009EEF02 /* ViewController.m in Sources */,
 				0C8E6EC51DD1A893009EEF02 /* AppDelegate.m in Sources */,
 				0C8E6EC21DD1A893009EEF02 /* main.m in Sources */,
@@ -353,6 +367,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 76NVUL9XC6;
 				INFOPLIST_FILE = YBPopupMenuDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Lee.YBPopupMenuDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -365,6 +380,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 76NVUL9XC6;
 				INFOPLIST_FILE = YBPopupMenuDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Lee.YBPopupMenuDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -414,6 +430,7 @@
 				0C8E6EE11DD1A893009EEF02 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0C8E6EE21DD1A893009EEF02 /* Build configuration list for PBXNativeTarget "YBPopupMenuDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +439,7 @@
 				0C8E6EE41DD1A893009EEF02 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "YBPopupMenu.h"
 
-@interface ViewController ()
+#define TITLES @[@"修改", @"删除", @"扫一扫",@"付款"]
+#define ICONS  @[@"motify",@"delete",@"saoyisao",@"pay"]
+@interface ViewController ()<YBPopupMenuDelegate>
 
 @end
 
@@ -16,9 +19,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
 }
 
+- (IBAction)onPopupClick:(UIButton *)sender {
+    [YBPopupMenu showRelyOnView:sender titles:TITLES icons:ICONS menuWidth:120 delegate:self];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UITouch *t = touches.anyObject;
+    CGPoint p = [t locationInView: self.view];
+    
+    YBPopupMenu *popupMenu = [[YBPopupMenu alloc] initWithTitles:TITLES icons:nil menuWidth:110 delegate:nil];
+    popupMenu.dismissOnSelected = NO;
+    popupMenu.textColor = [UIColor orangeColor];
+    popupMenu.isShowShadow = YES;
+    popupMenu.delegate = self;
+    [popupMenu showAtPoint:p];
+}
+
+#pragma mark - YBPopupMenuDelegate
+- (void)ybPopupMenuDidSelectedAtIndex:(NSInteger)index ybPopupMenu:(YBPopupMenu *)ybPopupMenu
+{
+    NSLog(@"点击了 %@ 选项",TITLES[index]);
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
