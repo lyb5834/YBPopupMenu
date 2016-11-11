@@ -2,12 +2,13 @@
  * 一行代码添加文本点击事件
 
 # 效果图
-![(演示效果)](http://7xt3dd.com1.z0.glb.clouddn.com/YBPopupMenuShow.gif)
+![(演示效果)](http://7xt3dd.com1.z0.glb.clouddn.com/YBPopupMenu.gif)
 
 #使用方法
   * `#import "YBPopupMenu.h"`
   * 类方法 `[YBPopupMenu showRelyOnView:sender titles:TITLES icons:ICONS menuWidth:120 delegate:self];`
-* 对象方法 `YBPopupMenu *popupMenu = [[YBPopupMenu alloc] initWithTitles:TITLES icons:nil menuWidth:110 delegate:self];
+
+  * 对象方法 `YBPopupMenu *popupMenu = [[YBPopupMenu alloc] initWithTitles:TITLES icons:nil menuWidth:110 delegate:self];
     [popupMenu showAtPoint:p];`
 
 #版本支持
