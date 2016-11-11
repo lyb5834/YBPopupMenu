@@ -222,7 +222,7 @@ UITableViewDataSource
 - (void)dismiss
 {
     [UIView animateWithDuration: 0.25 animations:^{
-        self.y += self.y > _anchorPoint.y ? -5 : 5;
+        self.layer.affineTransform = CGAffineTransformMakeScale(0.1, 0.1);
         self.alpha = 0;
         _bgView.alpha = 0;
     } completion:^(BOOL finished) {
@@ -364,17 +364,37 @@ UITableViewDataSource
     
     [kMainWindow addSubview: _bgView];
     [kMainWindow addSubview: self];
-    
+    self.layer.affineTransform = CGAffineTransformMakeScale(0.1, 0.1);
     [UIView animateWithDuration: 0.25 animations:^{
+        self.layer.affineTransform = CGAffineTransformMakeScale(1.0, 1.0);
         self.alpha = 1;
         _bgView.alpha = 1;
     }];
+}
+
+- (void)setAnimationAnchorPoint:(CGPoint)point
+{
+    CGRect originRect = self.frame;
+    self.layer.anchorPoint = point;
+    self.frame = originRect;
+}
+
+- (void)determineAnchorPoint
+{
+    CGPoint aPoint = CGPointMake(0.5, 0.5);
+    if (CGRectGetMaxY(self.frame) > kScreenHeight) {
+        aPoint = CGPointMake(fabs(kArrowPosition) / self.width, 1);
+    }else {
+        aPoint = CGPointMake(fabs(kArrowPosition) / self.width, 0);
+    }
+    [self setAnimationAnchorPoint:aPoint];
 }
 
 - (CAShapeLayer *)getMaskLayerWithPoint:(CGPoint)point
 {
     [self setArrowPointingWhere:point];
     CAShapeLayer *layer = [self drawMaskLayer];
+    [self determineAnchorPoint];
     if (CGRectGetMaxY(self.frame) > kScreenHeight) {
         
         kArrowPosition = self.width - kArrowPosition - kArrowWidth;
