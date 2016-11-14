@@ -36,6 +36,7 @@
     popupMenu.textColor = [UIColor orangeColor];
     popupMenu.isShowShadow = YES;
     popupMenu.delegate = self;
+    popupMenu.offset = 10;
     [popupMenu showAtPoint:p];
 }
 

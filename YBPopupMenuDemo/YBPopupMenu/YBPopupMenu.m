@@ -402,6 +402,7 @@ UITableViewDataSource
         layer.affineTransform = CGAffineTransformMakeRotation(M_PI);
         self.y = _anchorPoint.y - self.height;
     }
+    self.y += self.y >= _anchorPoint.y ? _offset : -_offset;
     return layer;
 }
 
