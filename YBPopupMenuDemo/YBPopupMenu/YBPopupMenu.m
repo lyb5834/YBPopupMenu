@@ -244,9 +244,6 @@ UITableViewDataSource
         _contentView.height -= 2 * kArrowHeight;
         _contentView.centerY = _mainView.centerY;
         
-        YBPopupMenuCell *cell = [self getLastVisibleCell];
-        cell.isShowSeparator = NO;
-        
         [_mainView addSubview: _contentView];
         [self addSubview: _mainView];
         
