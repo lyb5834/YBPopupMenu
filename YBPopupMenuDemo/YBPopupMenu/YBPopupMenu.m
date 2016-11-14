@@ -132,6 +132,43 @@
 @end
 
 
+#pragma mark - /////////////
+#pragma mark - private cell
+
+@interface YBPopupMenuCell : UITableViewCell
+@property (nonatomic, assign) BOOL isShowSeparator;
+@end
+
+@implementation YBPopupMenuCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        _isShowSeparator = YES;
+        [self setNeedsDisplay];
+    }
+    return self;
+}
+
+- (void)setIsShowSeparator:(BOOL)isShowSeparator
+{
+    _isShowSeparator = isShowSeparator;
+    [self setNeedsDisplay];
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    if (!_isShowSeparator) return;
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, rect.size.height - 0.5, rect.size.width, 0.5)];
+    [[UIColor lightGrayColor] setFill];
+    [bezierPath fillWithBlendMode:kCGBlendModeNormal alpha:1];
+    [bezierPath closePath];
+}
+
+@end
+
+
 #pragma mark - ///////////
 #pragma mark - YBPopupMenu
 
@@ -207,6 +244,9 @@ UITableViewDataSource
         _contentView.height -= 2 * kArrowHeight;
         _contentView.centerY = _mainView.centerY;
         
+        YBPopupMenuCell *cell = [self getLastVisibleCell];
+        cell.isShowSeparator = NO;
+        
         [_mainView addSubview: _contentView];
         [self addSubview: _mainView];
         
@@ -272,14 +312,9 @@ UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * identifier = @"ybPopupMenu";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    YBPopupMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
-        if (_titles.count- 1 != indexPath.row) {
-            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 44 - 0.5, self.width, 0.5)];
-            line.backgroundColor = [UIColor lightGrayColor];
-            [cell.contentView addSubview:line];
-        }
+        cell = [[YBPopupMenuCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
     }
     cell.textLabel.textColor = _textColor;
     cell.textLabel.font = [UIFont systemFontOfSize:_fontSize];
@@ -307,6 +342,29 @@ UITableViewDataSource
         
         [self.delegate ybPopupMenuDidSelectedAtIndex:indexPath.row ybPopupMenu:self];
     }
+}
+
+#pragma mark - scrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    YBPopupMenuCell *cell = [self getLastVisibleCell];
+    cell.isShowSeparator = YES;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    YBPopupMenuCell *cell = [self getLastVisibleCell];
+    cell.isShowSeparator = NO;
+}
+
+- (YBPopupMenuCell *)getLastVisibleCell
+{
+    NSArray <NSIndexPath *>*indexPaths = [_contentView indexPathsForVisibleRows];
+    indexPaths = [indexPaths sortedArrayUsingComparator:^NSComparisonResult(NSIndexPath *  _Nonnull obj1, NSIndexPath *  _Nonnull obj2) {
+        return obj1.row < obj2.row;
+    }];
+    NSIndexPath *indexPath = indexPaths.firstObject;
+    return [_contentView cellForRowAtIndexPath:indexPath];
 }
 
 #pragma mark private functions
@@ -364,6 +422,8 @@ UITableViewDataSource
     
     [kMainWindow addSubview: _bgView];
     [kMainWindow addSubview: self];
+    YBPopupMenuCell *cell = [self getLastVisibleCell];
+    cell.isShowSeparator = NO;
     self.layer.affineTransform = CGAffineTransformMakeScale(0.1, 0.1);
     [UIView animateWithDuration: 0.25 animations:^{
         self.layer.affineTransform = CGAffineTransformMakeScale(1.0, 1.0);
@@ -466,4 +526,3 @@ UITableViewDataSource
 }
 
 @end
-
