@@ -33,10 +33,10 @@
     
     YBPopupMenu *popupMenu = [[YBPopupMenu alloc] initWithTitles:TITLES icons:nil menuWidth:110 delegate:nil];
     popupMenu.dismissOnSelected = NO;
-    popupMenu.textColor = [UIColor orangeColor];
     popupMenu.isShowShadow = YES;
     popupMenu.delegate = self;
     popupMenu.offset = 10;
+    popupMenu.type = YBPopupMenuTypeDark;
     [popupMenu showAtPoint:p];
 }
 

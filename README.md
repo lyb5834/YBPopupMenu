@@ -2,7 +2,10 @@
  * 快速集成popupMenu
 
 # 效果图
-![(演示效果)](http://7xt3dd.com1.z0.glb.clouddn.com/YBPopupMenu.gif)
+![(演示效果)](http://7xt3dd.com1.z0.glb.clouddn.com/YBPopupMenuGifShow.gif)
+
+#最新更新
+  * 可以选择显示模式，有2种（明色和暗色）
 
 #使用方法
   * `#import "YBPopupMenu.h"`

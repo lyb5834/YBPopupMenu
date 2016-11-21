@@ -137,6 +137,7 @@
 
 @interface YBPopupMenuCell : UITableViewCell
 @property (nonatomic, assign) BOOL isShowSeparator;
+@property (nonatomic, strong) UIColor * separatorColor;
 @end
 
 @implementation YBPopupMenuCell
@@ -146,6 +147,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _isShowSeparator = YES;
+        _separatorColor = [UIColor lightGrayColor];
         [self setNeedsDisplay];
     }
     return self;
@@ -157,11 +159,17 @@
     [self setNeedsDisplay];
 }
 
+- (void)setSeparatorColor:(UIColor *)separatorColor
+{
+    _separatorColor = separatorColor;
+    [self setNeedsDisplay];
+}
+
 - (void)drawRect:(CGRect)rect
 {
     if (!_isShowSeparator) return;
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, rect.size.height - 0.5, rect.size.width, 0.5)];
-    [[UIColor lightGrayColor] setFill];
+    [_separatorColor setFill];
     [bezierPath fillWithBlendMode:kCGBlendModeNormal alpha:1];
     [bezierPath closePath];
 }
@@ -182,9 +190,9 @@ UITableViewDataSource
 @implementation YBPopupMenu
 {
     
-    UIView *_mainView;
-    UITableView *_contentView;
-    UIView *_bgView;
+    UIView * _mainView;
+    UITableView * _contentView;
+    UIView * _bgView;
     
     CGPoint _anchorPoint;
     
@@ -196,6 +204,8 @@ UITableViewDataSource
     NSArray * _titles;
     NSArray * _icons;
     
+    UIColor * _contentColor;
+    UIColor * _separatorColor;
 }
 
 @synthesize cornerRadius = kCornerRadius;
@@ -217,6 +227,9 @@ UITableViewDataSource
         _fontSize = 15.0;
         _textColor = [UIColor blackColor];
         _offset = 0.0;
+        _type = YBPopupMenuTypeDefault;
+        _contentColor = [UIColor whiteColor];
+        _separatorColor = [UIColor lightGrayColor];
         
         if (delegate) self.delegate = delegate;
         
@@ -231,11 +244,12 @@ UITableViewDataSource
         self.layer.shadowRadius = 2.0;
         
         _mainView = [[UIView alloc] initWithFrame: self.bounds];
-        _mainView.backgroundColor = [UIColor whiteColor];
+        _mainView.backgroundColor = _contentColor;
         _mainView.layer.cornerRadius = kCornerRadius;
         _mainView.layer.masksToBounds = YES;
         
         _contentView = [[UITableView alloc] initWithFrame: _mainView.bounds style:UITableViewStylePlain];
+        _contentView.backgroundColor = [UIColor clearColor];
         _contentView.delegate = self;
         _contentView.dataSource= self;
         _contentView.bounces = titles.count > 5 ? YES : NO;
@@ -313,9 +327,11 @@ UITableViewDataSource
     if (!cell) {
         cell = [[YBPopupMenuCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
     }
+    cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = _textColor;
     cell.textLabel.font = [UIFont systemFontOfSize:_fontSize];
     cell.textLabel.text = _titles[indexPath.row];
+    cell.separatorColor = _separatorColor;
     if (_icons.count >= indexPath.row + 1) {
         if ([_icons[indexPath.row] isKindOfClass:[NSString class]]) {
             cell.imageView.image = [UIImage imageNamed:_icons[indexPath.row]];
@@ -365,6 +381,30 @@ UITableViewDataSource
 }
 
 #pragma mark private functions
+- (void)setType:(YBPopupMenuType)type
+{
+    _type = type;
+    switch (type) {
+        case YBPopupMenuTypeDark:
+        {
+            _textColor = [UIColor lightGrayColor];
+            _contentColor = [UIColor colorWithRed:0.25 green:0.27 blue:0.29 alpha:1];
+            _separatorColor = [UIColor lightGrayColor];
+        }
+            break;
+            
+        default:
+        {
+            _textColor = [UIColor blackColor];
+            _contentColor = [UIColor whiteColor];
+            _separatorColor = [UIColor lightGrayColor];
+        }
+            break;
+    }
+    _mainView.backgroundColor = _contentColor;
+    [_contentView reloadData];
+}
+
 - (void)setFontSize:(CGFloat)fontSize
 {
     _fontSize = fontSize;

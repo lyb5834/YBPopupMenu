@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger , YBPopupMenuType) {
+    YBPopupMenuTypeDefault = 0,
+    YBPopupMenuTypeDark
+};
+
 @class YBPopupMenu;
 @protocol YBPopupMenuDelegate <NSObject>
 
@@ -56,6 +61,11 @@
  设置偏移距离 (>= 0) Default is 0.0 
  */
 @property (nonatomic, assign) CGFloat offset;
+
+/**
+ 设置显示模式 Default is YBPopupMenuTypeDefault
+ */
+@property (nonatomic, assign) YBPopupMenuType type;
 
 /**
  代理
