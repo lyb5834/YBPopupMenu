@@ -4,6 +4,9 @@
 # 效果图
 ![(演示效果)](http://7xt3dd.com1.z0.glb.clouddn.com/YBPopupMenuGifShow.gif)
 
+#cocoapods支持
+  * 只需在`Podfile`中加入`pod 'YBPopupMenu'`后`pod install`即可
+
 #最新更新
   * 可以选择显示模式，有2种（明色和暗色）
 
