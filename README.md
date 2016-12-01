@@ -15,7 +15,7 @@
   * 类方法 `[YBPopupMenu showRelyOnView:sender titles:TITLES icons:ICONS menuWidth:120 delegate:self];`
 
   * 对象方法 `YBPopupMenu *popupMenu = [[YBPopupMenu alloc] initWithTitles:TITLES icons:nil menuWidth:110 delegate:self];
-    [popupMenu showAtPoint:p];`
+    [popupMenu showAtPoint:p];`  因为代码架构问题，多次弹出会出现不可预知的问题，因此该方法已移除！！！
 
 #版本支持
   * `xcode7.0+`

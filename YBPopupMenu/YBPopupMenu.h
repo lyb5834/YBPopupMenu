@@ -73,21 +73,12 @@ typedef NS_ENUM(NSInteger , YBPopupMenuType) {
 @property (nonatomic, weak) id <YBPopupMenuDelegate> delegate;
 
 /**
- 初始化popupMenu
-
+ 在指定位置弹出类方法
+ 
  @param titles    标题数组
  @param icons     图标数组
  @param itemWidth 菜单宽度
  @param delegate  代理
- */
-- (instancetype)initWithTitles:(NSArray *)titles
-                         icons:(NSArray *)icons
-                     menuWidth:(CGFloat)itemWidth
-                      delegate:(id<YBPopupMenuDelegate>)delegate;
-
-
-/**
- 在指定位置弹出类方法
  */
 + (instancetype)showAtPoint:(CGPoint)point
                      titles:(NSArray *)titles
@@ -98,28 +89,17 @@ typedef NS_ENUM(NSInteger , YBPopupMenuType) {
 
 /**
   依赖指定view弹出类方法
+ 
+ @param titles    标题数组
+ @param icons     图标数组
+ @param itemWidth 菜单宽度
+ @param delegate  代理
  */
 + (instancetype)showRelyOnView:(UIView *)view
                         titles:(NSArray *)titles
                          icons:(NSArray *)icons
                      menuWidth:(CGFloat)itemWidth
                       delegate:(id<YBPopupMenuDelegate>)delegate;
-
-
-/**
- 在指定位置弹出
-
- @param point 需要弹出的point
- */
-- (void)showAtPoint:(CGPoint)point;
-
-
-/**
- 依赖指定view弹出
-
- @param view 需要依赖的view
- */
-- (void)showRelyOnView:(UIView *)view;
 
 /**
  消失

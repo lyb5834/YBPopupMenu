@@ -31,13 +31,12 @@
     UITouch *t = touches.anyObject;
     CGPoint p = [t locationInView: self.view];
     
-    YBPopupMenu *popupMenu = [[YBPopupMenu alloc] initWithTitles:TITLES icons:nil menuWidth:110 delegate:nil];
+    YBPopupMenu *popupMenu = [YBPopupMenu showAtPoint:p titles:TITLES icons:nil menuWidth:110 delegate:nil];
     popupMenu.dismissOnSelected = NO;
     popupMenu.isShowShadow = YES;
     popupMenu.delegate = self;
     popupMenu.offset = 10;
     popupMenu.type = YBPopupMenuTypeDark;
-    [popupMenu showAtPoint:p];
 }
 
 #pragma mark - YBPopupMenuDelegate
