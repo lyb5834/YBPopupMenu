@@ -21,6 +21,8 @@ typedef NS_ENUM(NSInteger , YBPopupMenuType) {
  点击事件回调
  */
 - (void)ybPopupMenuDidSelectedAtIndex:(NSInteger)index ybPopupMenu:(YBPopupMenu *)ybPopupMenu;
+- (void)ybPopupMenuBeganDismiss;
+- (void)ybPopupMenuDidDismiss;
 
 @end
 
