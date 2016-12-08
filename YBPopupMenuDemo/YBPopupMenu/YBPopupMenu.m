@@ -272,11 +272,17 @@ UITableViewDataSource
 
 - (void)dismiss
 {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenuBeganDismiss)]) {
+        [self.delegate ybPopupMenuBeganDismiss];
+    }
     [UIView animateWithDuration: 0.25 animations:^{
         self.layer.affineTransform = CGAffineTransformMakeScale(0.1, 0.1);
         self.alpha = 0;
         _bgView.alpha = 0;
     } completion:^(BOOL finished) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenuDidDismiss)]) {
+            [self.delegate ybPopupMenuDidDismiss];
+        }
         self.delegate = nil;
         [self removeFromSuperview];
         [_bgView removeFromSuperview];
