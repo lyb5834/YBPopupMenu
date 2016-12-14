@@ -10,6 +10,8 @@
 #最新更新
   * 可以选择显示模式，有2种（明色和暗色）
 
+  * 修复了设置了`dismissOnTouchOutside`后不能dismiss的bug
+
 #使用方法
   * `#import "YBPopupMenu.h"`
   * 类方法 `[YBPopupMenu showRelyOnView:sender titles:TITLES icons:ICONS menuWidth:120 delegate:self];`

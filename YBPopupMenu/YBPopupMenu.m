@@ -425,7 +425,7 @@ UITableViewDataSource
 
 - (void)setDismissOnTouchOutside:(BOOL)dismissOnTouchOutside
 {
-    _dismissOnSelected = dismissOnTouchOutside;
+    _dismissOnTouchOutside = dismissOnTouchOutside;
     if (!dismissOnTouchOutside) {
         for (UIGestureRecognizer *gr in _bgView.gestureRecognizers) {
             [_bgView removeGestureRecognizer:gr];

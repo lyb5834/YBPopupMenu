@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "YBPopupMenu"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "快速集成popupMenu"
   s.description  = "Code created and updated by Lyb."
   s.homepage     = "https://github.com/lyb5834/YBPopupMenu.git"
