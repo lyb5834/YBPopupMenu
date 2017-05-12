@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C8A9ACF1EC555BE002F22E1 /* YBPopupMenuPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8A9ACC1EC555BE002F22E1 /* YBPopupMenuPath.m */; };
+		0C8A9AD01EC555BE002F22E1 /* YBRectConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8A9ACE1EC555BE002F22E1 /* YBRectConst.m */; };
 		0C8E6EC21DD1A893009EEF02 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EC11DD1A893009EEF02 /* main.m */; };
 		0C8E6EC51DD1A893009EEF02 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EC41DD1A893009EEF02 /* AppDelegate.m */; };
 		0C8E6EC81DD1A893009EEF02 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EC71DD1A893009EEF02 /* ViewController.m */; };
@@ -28,6 +30,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C8A9ACB1EC555BE002F22E1 /* YBPopupMenuPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBPopupMenuPath.h; sourceTree = "<group>"; };
+		0C8A9ACC1EC555BE002F22E1 /* YBPopupMenuPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBPopupMenuPath.m; sourceTree = "<group>"; };
+		0C8A9ACD1EC555BE002F22E1 /* YBRectConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBRectConst.h; sourceTree = "<group>"; };
+		0C8A9ACE1EC555BE002F22E1 /* YBRectConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBRectConst.m; sourceTree = "<group>"; };
 		0C8E6EBD1DD1A893009EEF02 /* YBPopupMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YBPopupMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C8E6EC11DD1A893009EEF02 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0C8E6EC31DD1A893009EEF02 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -120,6 +126,10 @@
 			children = (
 				0C8E6EE61DD1A8CF009EEF02 /* YBPopupMenu.h */,
 				0C8E6EE71DD1A8CF009EEF02 /* YBPopupMenu.m */,
+				0C8A9ACB1EC555BE002F22E1 /* YBPopupMenuPath.h */,
+				0C8A9ACC1EC555BE002F22E1 /* YBPopupMenuPath.m */,
+				0C8A9ACD1EC555BE002F22E1 /* YBRectConst.h */,
+				0C8A9ACE1EC555BE002F22E1 /* YBRectConst.m */,
 			);
 			path = YBPopupMenu;
 			sourceTree = "<group>";
@@ -229,6 +239,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C8E6EE81DD1A8CF009EEF02 /* YBPopupMenu.m in Sources */,
+				0C8A9ACF1EC555BE002F22E1 /* YBPopupMenuPath.m in Sources */,
+				0C8A9AD01EC555BE002F22E1 /* YBRectConst.m in Sources */,
 				0C8E6EC81DD1A893009EEF02 /* ViewController.m in Sources */,
 				0C8E6EC51DD1A893009EEF02 /* AppDelegate.m in Sources */,
 				0C8E6EC21DD1A893009EEF02 /* main.m in Sources */,
