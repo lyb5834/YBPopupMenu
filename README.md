@@ -5,7 +5,7 @@
 ![(演示效果)](http://7xt3dd.com1.z0.glb.clouddn.com/YBPopupMenuGif.gif)
 
 # cocoapods支持
-  * 只需在`Podfile`中加入`pod 'YBPopupMenu'`后`pod install`即可
+  * 只需在`Podfile`中加入`pod 'YBPopupMenu', '~> 1.0.0'`后`pod install`即可
 
 # 重大更新
   * 代码全部重构，不过完全兼容原先的API接口
