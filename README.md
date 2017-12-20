@@ -5,9 +5,15 @@
 ![(演示效果)](http://7xt3dd.com1.z0.glb.clouddn.com/YBPopupMenuGif.gif)
 
 # cocoapods支持
-  * 只需在`Podfile`中加入`pod 'YBPopupMenu', '~> 1.0.0'`后`pod install`即可
+  * 只需在`Podfile`中加入`pod 'YBPopupMenu', '~> 1.1.0'`后`pod install`即可
 
-# 重大更新
+# 最近更新
+  * 开放部分私有属性，如`titles`，`images`,`tableView`,`minSpace`等等
+  * 点击回调方法有更新（旧的还可以用）
+  * 增加可自定义Cell的回调，遇到奇葩需求可以自定义设置（具体使用方法可参考demo）
+
+  
+# 上次更新
   * 代码全部重构，不过完全兼容原先的API接口
   * 增加了`YBPopupMenuPriorityDirection`属性，可以设置箭头的第一优先级方向，当将要超过屏幕时会自动反转方向
   * 增加了`rectCorner`属性，可以自定义圆角（当反转时会自动镜像的反转圆角）
@@ -47,5 +53,5 @@
 # 版本支持
   * `xcode7.0+`
 
-  * 如果您在使用本库的过程中发现任何bug或者有更好建议，欢迎联系本人email  lyb5834@126.com
+  * 如果您在使用本库的过程中发现任何bug或者有更好建议，欢迎 [@issues](https://github.com/lyb5834/YBPopupMenu/issues) 我或联系本人 [email](lyb5834@126.com)  
 
