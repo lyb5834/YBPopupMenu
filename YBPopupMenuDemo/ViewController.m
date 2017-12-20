@@ -8,11 +8,13 @@
 
 #import "ViewController.h"
 #import "YBPopupMenu.h"
+#import "CustomTestCell.h"
 
 #define TITLES @[@"修改", @"删除", @"扫一扫",@"付款"]
 #define ICONS  @[@"motify",@"delete",@"saoyisao",@"pay"]
 @interface ViewController ()<YBPopupMenuDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UILabel *customCellView;
 
 @property (nonatomic, strong) YBPopupMenu *popupMenu;
 @end
@@ -41,8 +43,16 @@
     UITouch *t = touches.anyObject;
     CGPoint p = [t locationInView: self.view];
     
-    //推荐用这种写法
-    [YBPopupMenu showAtPoint:p titles:TITLES icons:nil menuWidth:110 otherSettings:^(YBPopupMenu *popupMenu) {
+    if (CGRectContainsPoint(self.customCellView.frame, p)) {
+        [self showCustomPopupMenuWithPoint:p];
+    }else {
+        [self showDarkPopupMenuWithPoint:p];
+    }
+}
+
+- (void)showDarkPopupMenuWithPoint:(CGPoint)point
+{
+    [YBPopupMenu showAtPoint:point titles:TITLES icons:nil menuWidth:110 otherSettings:^(YBPopupMenu *popupMenu) {
         popupMenu.dismissOnSelected = NO;
         popupMenu.isShowShadow = YES;
         popupMenu.delegate = self;
@@ -52,10 +62,65 @@
     }];
 }
 
-#pragma mark - YBPopupMenuDelegate
-- (void)ybPopupMenuDidSelectedAtIndex:(NSInteger)index ybPopupMenu:(YBPopupMenu *)ybPopupMenu
+- (void)showCustomPopupMenuWithPoint:(CGPoint)point
 {
-    NSLog(@"点击了 %@ 选项",TITLES[index]);
+    [YBPopupMenu showAtPoint:point titles:TITLES icons:nil menuWidth:110 otherSettings:^(YBPopupMenu *popupMenu) {
+        popupMenu.dismissOnSelected = YES;
+        popupMenu.isShowShadow = YES;
+        popupMenu.delegate = self;
+        popupMenu.type = YBPopupMenuTypeDefault;
+        popupMenu.cornerRadius = 8;
+        popupMenu.rectCorner = UIRectCornerTopLeft| UIRectCornerTopRight;
+        popupMenu.tag = 100;
+        //如果不加这句默认是 UITableViewCellSeparatorStyleNone 的
+        popupMenu.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }];
+}
+
+#pragma mark - YBPopupMenuDelegate
+- (void)ybPopupMenu:(YBPopupMenu *)ybPopupMenu didSelectedAtIndex:(NSInteger)index
+{
+    //推荐回调
+    NSLog(@"点击了 %@ 选项",ybPopupMenu.titles[index]);
+}
+
+- (void)ybPopupMenuBeganDismiss
+{
+    if (self.textField.isFirstResponder) {
+        [self.textField resignFirstResponder];
+    }
+}
+
+- (UITableViewCell *)ybPopupMenu:(YBPopupMenu *)ybPopupMenu cellForRowAtIndex:(NSInteger)index
+{
+    if (ybPopupMenu.tag != 100) {
+        return nil;
+    }
+    static NSString * identifier = @"customCell";
+    CustomTestCell * cell = [ybPopupMenu.tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"CustomTestCell" owner:self options:nil] firstObject];
+    }
+    
+    cell.titleLabel.text = TITLES[index];
+    cell.iconImageView.image = [UIImage imageNamed:ICONS[index]];
+    
+    switch (index) {
+        case 0:
+            cell.statusLabel.hidden = NO;
+            cell.badge.hidden = YES;
+            break;
+        case 2:
+            cell.statusLabel.hidden = YES;
+            cell.badge.hidden = NO;
+            break;
+        default:
+            cell.statusLabel.hidden = YES;
+            cell.badge.hidden = YES;
+            break;
+    }
+    
+    return cell;
 }
 
 #pragma mark - UITextFieldDelegate
@@ -69,7 +134,7 @@
         popupMenu.itemHeight = 60;
         popupMenu.borderWidth = 1;
         popupMenu.fontSize = 12;
-        popupMenu.dismissOnTouchOutside = NO;
+        popupMenu.dismissOnTouchOutside = YES;
         popupMenu.dismissOnSelected = NO;
         popupMenu.borderColor = [UIColor brownColor];
         popupMenu.textColor = [UIColor brownColor];
@@ -79,7 +144,6 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
     [_popupMenu dismiss];
     return YES;
 }

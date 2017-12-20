@@ -68,11 +68,7 @@ UITableViewDataSource
 
 @property (nonatomic, strong) UIView      * menuBackView;
 @property (nonatomic) CGRect                relyRect;
-@property (nonatomic, strong) UITableView * tableView;
-@property (nonatomic, assign) CGFloat       minSpace;
 @property (nonatomic, assign) CGFloat       itemWidth;
-@property (nonatomic, strong) NSArray     * titles;
-@property (nonatomic, strong) NSArray     * images;
 @property (nonatomic) CGPoint               point;
 @property (nonatomic, assign) BOOL          isCornerChanged;
 @property (nonatomic, strong) UIColor     * separatorColor;
@@ -172,6 +168,15 @@ UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell * tableViewCell = nil;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenu:cellForRowAtIndex:)]) {
+        tableViewCell = [self.delegate ybPopupMenu:self cellForRowAtIndex:indexPath.row];
+    }
+    
+    if (tableViewCell) {
+        return tableViewCell;
+    }
+    
     static NSString * identifier = @"ybPopupMenu";
     YBPopupMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
@@ -203,6 +208,11 @@ UITableViewDataSource
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return _itemHeight;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -212,19 +222,27 @@ UITableViewDataSource
         
         [self.delegate ybPopupMenuDidSelectedAtIndex:indexPath.row ybPopupMenu:self];
     }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenu:didSelectedAtIndex:)]) {
+        [self.delegate ybPopupMenu:self didSelectedAtIndex:indexPath.row];
+    }
 }
 
 #pragma mark - scrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    YBPopupMenuCell *cell = [self getLastVisibleCell];
-    cell.isShowSeparator = YES;
+    if ([[self getLastVisibleCell] isKindOfClass:[YBPopupMenuCell class]]) {
+        YBPopupMenuCell *cell = [self getLastVisibleCell];
+        cell.isShowSeparator = YES;
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    YBPopupMenuCell *cell = [self getLastVisibleCell];
-    cell.isShowSeparator = NO;
+    if ([[self getLastVisibleCell] isKindOfClass:[YBPopupMenuCell class]]) {
+        YBPopupMenuCell *cell = [self getLastVisibleCell];
+        cell.isShowSeparator = NO;
+    }
 }
 
 - (YBPopupMenuCell *)getLastVisibleCell
@@ -242,8 +260,10 @@ UITableViewDataSource
 {
     [YBMainWindow addSubview:_menuBackView];
     [YBMainWindow addSubview:self];
-    YBPopupMenuCell *cell = [self getLastVisibleCell];
-    cell.isShowSeparator = NO;
+    if ([[self getLastVisibleCell] isKindOfClass:[YBPopupMenuCell class]]) {
+        YBPopupMenuCell *cell = [self getLastVisibleCell];
+        cell.isShowSeparator = NO;
+    }
     if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenuBeganShow)]) {
         [self.delegate ybPopupMenuBeganShow];
     }
@@ -378,7 +398,6 @@ UITableViewDataSource
 - (void)setItemHeight:(CGFloat)itemHeight
 {
     _itemHeight = itemHeight;
-    self.tableView.rowHeight = itemHeight;
     [self updateUI];
 }
 

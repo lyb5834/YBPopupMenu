@@ -34,18 +34,47 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
 @protocol YBPopupMenuDelegate <NSObject>
 
 @optional
+
+///////旧版本/////////
 /**
  点击事件回调
  */
-- (void)ybPopupMenuDidSelectedAtIndex:(NSInteger)index ybPopupMenu:(YBPopupMenu *)ybPopupMenu;
+- (void)ybPopupMenuDidSelectedAtIndex:(NSInteger)index ybPopupMenu:(YBPopupMenu *)ybPopupMenu YBDeprecated("请替用 ybPopupMenu: didSelectedAtIndex: 方法");
 - (void)ybPopupMenuBeganDismiss;
 - (void)ybPopupMenuDidDismiss;
 - (void)ybPopupMenuBeganShow;
 - (void)ybPopupMenuDidShow;
 
+///////新版本/////////
+- (void)ybPopupMenu:(YBPopupMenu *)ybPopupMenu didSelectedAtIndex:(NSInteger)index;
+
+/**
+ 自定义cell
+ 
+ 可以自定义cell，设置后会忽略 fontSize textColor backColor type 属性
+ cell 的高度是根据 itemHeight 的，直接设置无效
+ 建议cell 背景色设置为透明色，不然切的圆角显示不出来
+ */
+- (UITableViewCell *)ybPopupMenu:(YBPopupMenu *)ybPopupMenu cellForRowAtIndex:(NSInteger)index;
+
 @end
 
 @interface YBPopupMenu : UIView
+
+/**
+ 标题数组 只读属性
+ */
+@property (nonatomic, strong, readonly) NSArray  * titles;
+
+/**
+ 图片数组 只读属性
+ */
+@property (nonatomic, strong, readonly) NSArray  * images;
+
+/**
+ tableView  Default separatorStyle is UITableViewCellSeparatorStyleNone
+ */
+@property (nonatomic, strong) UITableView * tableView;
 
 /**
  圆角半径 Default is 5.0
@@ -80,12 +109,12 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
 @property (nonatomic, assign) BOOL dismissOnTouchOutside;
 
 /**
- 设置字体大小 Default is 15
+ 设置字体大小 自定义cell时忽略 Default is 15
  */
 @property (nonatomic, assign) CGFloat fontSize;
 
 /**
- 设置字体颜色 Default is [UIColor blackColor]
+ 设置字体颜色 自定义cell时忽略 Default is [UIColor blackColor]
  */
 @property (nonatomic, strong) UIColor * textColor;
 
@@ -143,7 +172,7 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
 @property (nonatomic, assign) NSInteger maxVisibleCount;
 
 /**
- menu背景色 Default is WhiteColor
+ menu背景色 自定义cell时忽略 Default is WhiteColor
  */
 @property (nonatomic, strong) UIColor * backColor;
 
@@ -153,7 +182,12 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
 @property (nonatomic, assign) CGFloat itemHeight;
 
 /**
- 设置显示模式 Default is YBPopupMenuTypeDefault
+ popupMenu距离最近的Screen的距离 Default is 10
+ */
+@property (nonatomic, assign) CGFloat minSpace;
+
+/**
+ 设置显示模式 自定义cell时忽略 Default is YBPopupMenuTypeDefault
  */
 @property (nonatomic, assign) YBPopupMenuType type;
 

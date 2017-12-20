@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -109,6 +109,12 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="L3u-P5-CVV"/>
                                 </connections>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自定义cell测试" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z58-nm-OJu">
+                                <rect key="frame" x="57" y="447.5" width="260" height="144.5"/>
+                                <color key="backgroundColor" red="0.44890488180315935" green="0.8318417015970867" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -117,8 +123,12 @@
                             <constraint firstItem="lI0-6h-i92" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="4" id="3es-U2-nCV"/>
                             <constraint firstItem="YHn-Zq-8hF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="28" id="3sV-Yc-EWw"/>
                             <constraint firstAttribute="trailing" secondItem="s3o-74-jcO" secondAttribute="trailing" constant="16" id="467-L6-Tdr"/>
+                            <constraint firstItem="Z58-nm-OJu" firstAttribute="width" secondItem="DA6-6w-Ojz" secondAttribute="width" id="CCr-ur-oqp"/>
+                            <constraint firstItem="Z58-nm-OJu" firstAttribute="top" secondItem="DA6-6w-Ojz" secondAttribute="bottom" constant="20" id="Gcn-Jn-RrB"/>
                             <constraint firstItem="DA6-6w-Ojz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KuP-X2-wNV"/>
                             <constraint firstItem="tkT-N9-MEe" firstAttribute="centerX" secondItem="qkt-rd-gXc" secondAttribute="centerX" id="Luq-UK-tIf"/>
+                            <constraint firstItem="Z58-nm-OJu" firstAttribute="centerX" secondItem="DA6-6w-Ojz" secondAttribute="centerX" id="Ogb-0y-eQW"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Z58-nm-OJu" secondAttribute="bottom" constant="75" id="XSB-Je-A76"/>
                             <constraint firstItem="tkT-N9-MEe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="57" id="bnE-K8-7uY"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="s3o-74-jcO" secondAttribute="bottom" constant="20" id="fHP-uP-9xP"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YHn-Zq-8hF" secondAttribute="bottom" constant="20" id="hQC-5y-edA"/>
@@ -131,6 +141,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="customCellView" destination="Z58-nm-OJu" id="1Te-Sj-vyB"/>
                         <outlet property="textField" destination="qkt-rd-gXc" id="KRL-wg-dck"/>
                     </connections>
                 </viewController>

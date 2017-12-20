@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C660A231FEA39E7000BD9A5 /* CustomTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C660A211FEA39E7000BD9A5 /* CustomTestCell.m */; };
+		0C660A241FEA39E7000BD9A5 /* CustomTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C660A221FEA39E7000BD9A5 /* CustomTestCell.xib */; };
 		0C8A9ACF1EC555BE002F22E1 /* YBPopupMenuPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8A9ACC1EC555BE002F22E1 /* YBPopupMenuPath.m */; };
 		0C8A9AD01EC555BE002F22E1 /* YBRectConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8A9ACE1EC555BE002F22E1 /* YBRectConst.m */; };
 		0C8E6EC21DD1A893009EEF02 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EC11DD1A893009EEF02 /* main.m */; };
@@ -30,6 +32,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C660A201FEA39E7000BD9A5 /* CustomTestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTestCell.h; sourceTree = "<group>"; };
+		0C660A211FEA39E7000BD9A5 /* CustomTestCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTestCell.m; sourceTree = "<group>"; };
+		0C660A221FEA39E7000BD9A5 /* CustomTestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTestCell.xib; sourceTree = "<group>"; };
 		0C8A9ACB1EC555BE002F22E1 /* YBPopupMenuPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBPopupMenuPath.h; sourceTree = "<group>"; };
 		0C8A9ACC1EC555BE002F22E1 /* YBPopupMenuPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBPopupMenuPath.m; sourceTree = "<group>"; };
 		0C8A9ACD1EC555BE002F22E1 /* YBRectConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBRectConst.h; sourceTree = "<group>"; };
@@ -95,6 +100,9 @@
 				0C8E6EC41DD1A893009EEF02 /* AppDelegate.m */,
 				0C8E6EC61DD1A893009EEF02 /* ViewController.h */,
 				0C8E6EC71DD1A893009EEF02 /* ViewController.m */,
+				0C660A201FEA39E7000BD9A5 /* CustomTestCell.h */,
+				0C660A211FEA39E7000BD9A5 /* CustomTestCell.m */,
+				0C660A221FEA39E7000BD9A5 /* CustomTestCell.xib */,
 				0C8E6EC91DD1A893009EEF02 /* Main.storyboard */,
 				0C8E6ECC1DD1A893009EEF02 /* Assets.xcassets */,
 				0C8E6ECE1DD1A893009EEF02 /* LaunchScreen.storyboard */,
@@ -220,6 +228,7 @@
 			files = (
 				0C8E6ED01DD1A893009EEF02 /* LaunchScreen.storyboard in Resources */,
 				0C8E6ECD1DD1A893009EEF02 /* Assets.xcassets in Resources */,
+				0C660A241FEA39E7000BD9A5 /* CustomTestCell.xib in Resources */,
 				0C8E6ECB1DD1A893009EEF02 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +249,7 @@
 			files = (
 				0C8E6EE81DD1A8CF009EEF02 /* YBPopupMenu.m in Sources */,
 				0C8A9ACF1EC555BE002F22E1 /* YBPopupMenuPath.m in Sources */,
+				0C660A231FEA39E7000BD9A5 /* CustomTestCell.m in Sources */,
 				0C8A9AD01EC555BE002F22E1 /* YBRectConst.m in Sources */,
 				0C8E6EC81DD1A893009EEF02 /* ViewController.m in Sources */,
 				0C8E6EC51DD1A893009EEF02 /* AppDelegate.m in Sources */,
