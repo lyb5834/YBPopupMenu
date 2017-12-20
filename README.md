@@ -53,5 +53,5 @@
 # 版本支持
   * `xcode7.0+`
 
-  * 如果您在使用本库的过程中发现任何bug或者有更好建议，欢迎 [@issues](https://github.com/lyb5834/YBPopupMenu/issues) 我或联系本人 [email](lyb5834@126.com)  
+  * 如果您在使用本库的过程中发现任何bug或者有更好建议，欢迎 [@issues](https://github.com/lyb5834/YBPopupMenu/issues) 我或联系本人email lyb5834@126.com 
 
