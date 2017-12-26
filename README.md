@@ -5,7 +5,7 @@
 ![(演示效果)](http://7xt3dd.com1.z0.glb.clouddn.com/YBPopupMenuGif.gif)
 
 # cocoapods支持
-  * 只需在`Podfile`中加入`pod 'YBPopupMenu', '~> 1.1.1'`后`pod install`即可
+  * 只需在`Podfile`中加入`pod 'YBPopupMenu', '~> 1.1.2'`后`pod install`即可
 
 # 最近更新
   * 开放部分私有属性，如`titles`，`images`,`tableView`,`minSpace`等等
