@@ -19,12 +19,7 @@
 		0C8E6ED01DD1A893009EEF02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C8E6ECE1DD1A893009EEF02 /* LaunchScreen.storyboard */; };
 		0C8E6EDB1DD1A893009EEF02 /* YBPopupMenuDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EDA1DD1A893009EEF02 /* YBPopupMenuDemoUITests.m */; };
 		0C8E6EE81DD1A8CF009EEF02 /* YBPopupMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EE71DD1A8CF009EEF02 /* YBPopupMenu.m */; };
-		5D1EAF1320845252003B3011 /* YBPopupMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EE71DD1A8CF009EEF02 /* YBPopupMenu.m */; };
-		5D1EAF1520845252003B3011 /* YBPopupMenuPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8A9ACC1EC555BE002F22E1 /* YBPopupMenuPath.m */; };
-		5D1EAF1720845252003B3011 /* YBRectConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8A9ACE1EC555BE002F22E1 /* YBRectConst.m */; };
-		5D1EAF182084525A003B3011 /* YBPopupMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8E6EE61DD1A8CF009EEF02 /* YBPopupMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5D1EAF192084525A003B3011 /* YBPopupMenuPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8A9ACB1EC555BE002F22E1 /* YBPopupMenuPath.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5D1EAF1A2084525A003B3011 /* YBRectConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8A9ACD1EC555BE002F22E1 /* YBRectConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5D1EAF2620845514003B3011 /* YBPopupMenu_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D1EAF2420845514003B3011 /* YBPopupMenu_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +55,9 @@
 		0C8E6EDC1DD1A893009EEF02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C8E6EE61DD1A8CF009EEF02 /* YBPopupMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBPopupMenu.h; sourceTree = "<group>"; };
 		0C8E6EE71DD1A8CF009EEF02 /* YBPopupMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBPopupMenu.m; sourceTree = "<group>"; };
-		5D1EAF0A20845237003B3011 /* YBPopupMenu_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YBPopupMenu_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D1EAF2220845514003B3011 /* YBPopupMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YBPopupMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D1EAF2420845514003B3011 /* YBPopupMenu_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBPopupMenu_iOS.h; sourceTree = "<group>"; };
+		5D1EAF2520845514003B3011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +75,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5D1EAF0620845237003B3011 /* Frameworks */ = {
+		5D1EAF1E20845514003B3011 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -93,6 +90,7 @@
 			children = (
 				0C8E6EBF1DD1A893009EEF02 /* YBPopupMenuDemo */,
 				0C8E6ED91DD1A893009EEF02 /* YBPopupMenuDemoUITests */,
+				5D1EAF2320845514003B3011 /* YBPopupMenu iOS */,
 				0C8E6EBE1DD1A893009EEF02 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,7 +100,7 @@
 			children = (
 				0C8E6EBD1DD1A893009EEF02 /* YBPopupMenuDemo.app */,
 				0C8E6ED61DD1A893009EEF02 /* YBPopupMenuDemoUITests.xctest */,
-				5D1EAF0A20845237003B3011 /* YBPopupMenu_iOS.framework */,
+				5D1EAF2220845514003B3011 /* YBPopupMenu.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,16 +155,23 @@
 			path = YBPopupMenu;
 			sourceTree = "<group>";
 		};
+		5D1EAF2320845514003B3011 /* YBPopupMenu iOS */ = {
+			isa = PBXGroup;
+			children = (
+				5D1EAF2420845514003B3011 /* YBPopupMenu_iOS.h */,
+				5D1EAF2520845514003B3011 /* Info.plist */,
+			);
+			path = "YBPopupMenu iOS";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		5D1EAF0720845237003B3011 /* Headers */ = {
+		5D1EAF1F20845514003B3011 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D1EAF182084525A003B3011 /* YBPopupMenu.h in Headers */,
-				5D1EAF192084525A003B3011 /* YBPopupMenuPath.h in Headers */,
-				5D1EAF1A2084525A003B3011 /* YBRectConst.h in Headers */,
+				5D1EAF2620845514003B3011 /* YBPopupMenu_iOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,22 +213,22 @@
 			productReference = 0C8E6ED61DD1A893009EEF02 /* YBPopupMenuDemoUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		5D1EAF0920845237003B3011 /* YBPopupMenu-iOS */ = {
+		5D1EAF2120845514003B3011 /* YBPopupMenu iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5D1EAF0F20845237003B3011 /* Build configuration list for PBXNativeTarget "YBPopupMenu-iOS" */;
+			buildConfigurationList = 5D1EAF2920845514003B3011 /* Build configuration list for PBXNativeTarget "YBPopupMenu iOS" */;
 			buildPhases = (
-				5D1EAF0520845237003B3011 /* Sources */,
-				5D1EAF0620845237003B3011 /* Frameworks */,
-				5D1EAF0720845237003B3011 /* Headers */,
-				5D1EAF0820845237003B3011 /* Resources */,
+				5D1EAF1D20845514003B3011 /* Sources */,
+				5D1EAF1E20845514003B3011 /* Frameworks */,
+				5D1EAF1F20845514003B3011 /* Headers */,
+				5D1EAF2020845514003B3011 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "YBPopupMenu-iOS";
-			productName = "YBPopupMenu-iOS";
-			productReference = 5D1EAF0A20845237003B3011 /* YBPopupMenu_iOS.framework */;
+			name = "YBPopupMenu iOS";
+			productName = "YBPopupMenu iOS";
+			productReference = 5D1EAF2220845514003B3011 /* YBPopupMenu.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -246,7 +251,7 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 0C8E6EBC1DD1A893009EEF02;
 					};
-					5D1EAF0920845237003B3011 = {
+					5D1EAF2120845514003B3011 = {
 						CreatedOnToolsVersion = 9.1;
 						DevelopmentTeam = 9RWES6K38C;
 						ProvisioningStyle = Automatic;
@@ -268,7 +273,7 @@
 			targets = (
 				0C8E6EBC1DD1A893009EEF02 /* YBPopupMenuDemo */,
 				0C8E6ED51DD1A893009EEF02 /* YBPopupMenuDemoUITests */,
-				5D1EAF0920845237003B3011 /* YBPopupMenu-iOS */,
+				5D1EAF2120845514003B3011 /* YBPopupMenu iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -292,7 +297,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5D1EAF0820845237003B3011 /* Resources */ = {
+		5D1EAF2020845514003B3011 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -324,13 +329,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5D1EAF0520845237003B3011 /* Sources */ = {
+		5D1EAF1D20845514003B3011 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D1EAF1320845252003B3011 /* YBPopupMenu.m in Sources */,
-				5D1EAF1520845252003B3011 /* YBPopupMenuPath.m in Sources */,
-				5D1EAF1720845252003B3011 /* YBRectConst.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,7 +504,7 @@
 			};
 			name = Release;
 		};
-		5D1EAF1020845237003B3011 /* Debug */ = {
+		5D1EAF2720845514003B3011 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -524,12 +526,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "YBPopupMenu-iOS/Info.plist";
+				INFOPLIST_FILE = "YBPopupMenu iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.globalegrow.YBPopupMenu-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = YBPopupMenu;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -537,7 +539,7 @@
 			};
 			name = Debug;
 		};
-		5D1EAF1120845237003B3011 /* Release */ = {
+		5D1EAF2820845514003B3011 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -559,12 +561,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "YBPopupMenu-iOS/Info.plist";
+				INFOPLIST_FILE = "YBPopupMenu iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.globalegrow.YBPopupMenu-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = YBPopupMenu;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -602,11 +604,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5D1EAF0F20845237003B3011 /* Build configuration list for PBXNativeTarget "YBPopupMenu-iOS" */ = {
+		5D1EAF2920845514003B3011 /* Build configuration list for PBXNativeTarget "YBPopupMenu iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5D1EAF1020845237003B3011 /* Debug */,
-				5D1EAF1120845237003B3011 /* Release */,
+				5D1EAF2720845514003B3011 /* Debug */,
+				5D1EAF2820845514003B3011 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

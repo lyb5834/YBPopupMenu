@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5D1EAF0920845237003B3011"
+               BlueprintIdentifier = "5D1EAF2120845514003B3011"
                BuildableName = "YBPopupMenu_iOS.framework"
-               BlueprintName = "YBPopupMenu-iOS"
+               BlueprintName = "YBPopupMenu iOS"
                ReferencedContainer = "container:YBPopupMenuDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5D1EAF0920845237003B3011"
+            BlueprintIdentifier = "5D1EAF2120845514003B3011"
             BuildableName = "YBPopupMenu_iOS.framework"
-            BlueprintName = "YBPopupMenu-iOS"
+            BlueprintName = "YBPopupMenu iOS"
             ReferencedContainer = "container:YBPopupMenuDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -65,9 +65,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5D1EAF0920845237003B3011"
+            BlueprintIdentifier = "5D1EAF2120845514003B3011"
             BuildableName = "YBPopupMenu_iOS.framework"
-            BlueprintName = "YBPopupMenu-iOS"
+            BlueprintName = "YBPopupMenu iOS"
             ReferencedContainer = "container:YBPopupMenuDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
