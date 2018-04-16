@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5D1EAF2120845514003B3011"
-               BuildableName = "YBPopupMenu_iOS.framework"
+               BuildableName = "YBPopupMenu.framework"
                BlueprintName = "YBPopupMenu iOS"
                ReferencedContainer = "container:YBPopupMenuDemo.xcodeproj">
             </BuildableReference>
@@ -48,7 +48,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5D1EAF2120845514003B3011"
-            BuildableName = "YBPopupMenu_iOS.framework"
+            BuildableName = "YBPopupMenu.framework"
             BlueprintName = "YBPopupMenu iOS"
             ReferencedContainer = "container:YBPopupMenuDemo.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5D1EAF2120845514003B3011"
-            BuildableName = "YBPopupMenu_iOS.framework"
+            BuildableName = "YBPopupMenu.framework"
             BlueprintName = "YBPopupMenu iOS"
             ReferencedContainer = "container:YBPopupMenuDemo.xcodeproj">
          </BuildableReference>
