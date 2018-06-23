@@ -1,0 +1,4 @@
+git clone git@gitlab.egomsl.com:iOS/GearBest/Pods/Pod-Template.git && \
+cd Pod-Template && \
+GBPods-Template-CommandLine && \
+open ./
