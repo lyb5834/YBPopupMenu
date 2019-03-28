@@ -2,7 +2,7 @@
  * 快速集成popupMenu
 
 # 效果图
-![(演示效果)](http://7xt3dd.com1.z0.glb.clouddn.com/YBPopupMenuGif.gif)
+![(演示效果)](https://lyb5834.github.io/Images/YBPopupMenuGif.gif)
 
 # cocoapods支持
   * 只需在`Podfile`中加入`pod 'YBPopupMenu', '~> 1.1.2'`后`pod install`即可
