@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "YBPopupMenuPath.h"
+#import "YBPopupMenuDeviceOrientationManager.h"
+#import "YBPopupMenuAnimationManager.h"
 
 // 过期提醒
 #define YBDeprecated(instead) NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, instead)
@@ -35,17 +37,14 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
 
 @optional
 
-///////旧版本/////////
+- (void)ybPopupMenuBeganDismiss:(YBPopupMenu *)ybPopupMenu;
+- (void)ybPopupMenuDidDismiss:(YBPopupMenu *)ybPopupMenu;
+- (void)ybPopupMenuBeganShow:(YBPopupMenu *)ybPopupMenu;
+- (void)ybPopupMenuDidShow:(YBPopupMenu *)ybPopupMenu;
+
 /**
  点击事件回调
  */
-- (void)ybPopupMenuDidSelectedAtIndex:(NSInteger)index ybPopupMenu:(YBPopupMenu *)ybPopupMenu YBDeprecated("请替用 ybPopupMenu: didSelectedAtIndex: 方法");
-- (void)ybPopupMenuBeganDismiss;
-- (void)ybPopupMenuDidDismiss;
-- (void)ybPopupMenuBeganShow;
-- (void)ybPopupMenuDidShow;
-
-///////新版本/////////
 - (void)ybPopupMenu:(YBPopupMenu *)ybPopupMenu didSelectedAtIndex:(NSInteger)index;
 
 /**
@@ -192,26 +191,22 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
 @property (nonatomic, assign) YBPopupMenuType type;
 
 /**
+ 屏幕旋转管理
+ */
+@property (nonatomic, strong) id <YBPopupMenuDeviceOrientationManager> orientationManager;
+
+/**
+ 动画管理
+ */
+@property (nonatomic, strong) id <YBPopupMenuAnimationManager> animationManager;
+
+/**
  代理
  */
 @property (nonatomic, weak) id <YBPopupMenuDelegate> delegate;
 
 /**
  在指定位置弹出
- 
- @param titles    标题数组  数组里是NSString/NSAttributedString
- @param icons     图标数组  数组里是NSString/UIImage
- @param itemWidth 菜单宽度
- @param delegate  代理
- */
-+ (YBPopupMenu *)showAtPoint:(CGPoint)point
-                     titles:(NSArray *)titles
-                      icons:(NSArray *)icons
-                  menuWidth:(CGFloat)itemWidth
-                   delegate:(id<YBPopupMenuDelegate>)delegate;
-
-/**
- 在指定位置弹出(推荐方法)
  
  @param point          弹出的位置
  @param titles         标题数组  数组里是NSString/NSAttributedString
@@ -227,20 +222,6 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
 
 /**
  依赖指定view弹出
- 
- @param titles    标题数组  数组里是NSString/NSAttributedString
- @param icons     图标数组  数组里是NSString/UIImage
- @param itemWidth 菜单宽度
- @param delegate  代理
- */
-+ (YBPopupMenu *)showRelyOnView:(UIView *)view
-                        titles:(NSArray *)titles
-                         icons:(NSArray *)icons
-                     menuWidth:(CGFloat)itemWidth
-                      delegate:(id<YBPopupMenuDelegate>)delegate;
-
-/**
- 依赖指定view弹出(推荐方法)
 
  @param titles         标题数组  数组里是NSString/NSAttributedString
  @param icons          图标数组  数组里是NSString/UIImage

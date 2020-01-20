@@ -11,7 +11,7 @@
 
 #define YBScreenWidth [UIScreen mainScreen].bounds.size.width
 #define YBScreenHeight [UIScreen mainScreen].bounds.size.height
-#define YBMainWindow  [UIApplication sharedApplication].keyWindow
+#define YBMainWindow  [UIApplication sharedApplication].delegate.window
 #define YB_SAFE_BLOCK(BlockName, ...) ({ !BlockName ? nil : BlockName(__VA_ARGS__); })
 
 #pragma mark - /////////////
@@ -47,6 +47,13 @@
     [self setNeedsDisplay];
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.contentView.frame = self.bounds;
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+}
+
 - (void)drawRect:(CGRect)rect
 {
     if (!_isShowSeparator) return;
@@ -73,6 +80,7 @@ UITableViewDataSource
 @property (nonatomic, assign) BOOL          isCornerChanged;
 @property (nonatomic, strong) UIColor     * separatorColor;
 @property (nonatomic, assign) BOOL          isChangeDirection;
+@property (nonatomic, strong) UIView      * relyView;
 @end
 
 @implementation YBPopupMenu
@@ -87,33 +95,6 @@ UITableViewDataSource
 }
 
 #pragma mark - publics
-+ (YBPopupMenu *)showAtPoint:(CGPoint)point titles:(NSArray *)titles icons:(NSArray *)icons menuWidth:(CGFloat)itemWidth delegate:(id<YBPopupMenuDelegate>)delegate
-{
-    YBPopupMenu *popupMenu = [[YBPopupMenu alloc] init];
-    popupMenu.point = point;
-    popupMenu.titles = titles;
-    popupMenu.images = icons;
-    popupMenu.itemWidth = itemWidth;
-    popupMenu.delegate = delegate;
-    [popupMenu show];
-    return popupMenu;
-}
-
-+ (YBPopupMenu *)showRelyOnView:(UIView *)view titles:(NSArray *)titles icons:(NSArray *)icons menuWidth:(CGFloat)itemWidth delegate:(id<YBPopupMenuDelegate>)delegate
-{
-    CGRect absoluteRect = [view convertRect:view.bounds toView:YBMainWindow];
-    CGPoint relyPoint = CGPointMake(absoluteRect.origin.x + absoluteRect.size.width / 2, absoluteRect.origin.y + absoluteRect.size.height);
-    YBPopupMenu *popupMenu = [[YBPopupMenu alloc] init];
-    popupMenu.point = relyPoint;
-    popupMenu.relyRect = absoluteRect;
-    popupMenu.titles = titles;
-    popupMenu.images = icons;
-    popupMenu.itemWidth = itemWidth;
-    popupMenu.delegate = delegate;
-    [popupMenu show];
-    return popupMenu;
-}
-
 + (YBPopupMenu *)showAtPoint:(CGPoint)point titles:(NSArray *)titles icons:(NSArray *)icons menuWidth:(CGFloat)itemWidth otherSettings:(void (^) (YBPopupMenu * popupMenu))otherSetting
 {
     YBPopupMenu *popupMenu = [[YBPopupMenu alloc] init];
@@ -128,11 +109,8 @@ UITableViewDataSource
 
 + (YBPopupMenu *)showRelyOnView:(UIView *)view titles:(NSArray *)titles icons:(NSArray *)icons menuWidth:(CGFloat)itemWidth otherSettings:(void (^) (YBPopupMenu * popupMenu))otherSetting
 {
-    CGRect absoluteRect = [view convertRect:view.bounds toView:YBMainWindow];
-    CGPoint relyPoint = CGPointMake(absoluteRect.origin.x + absoluteRect.size.width / 2, absoluteRect.origin.y + absoluteRect.size.height);
     YBPopupMenu *popupMenu = [[YBPopupMenu alloc] init];
-    popupMenu.point = relyPoint;
-    popupMenu.relyRect = absoluteRect;
+    popupMenu.relyView = view;
     popupMenu.titles = titles;
     popupMenu.images = icons;
     popupMenu.itemWidth = itemWidth;
@@ -143,20 +121,19 @@ UITableViewDataSource
 
 - (void)dismiss
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenuBeganDismiss)]) {
-        [self.delegate ybPopupMenuBeganDismiss];
+    [self.orientationManager endMonitorDeviceOrientation];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenuBeganDismiss:)]) {
+        [self.delegate ybPopupMenuBeganDismiss:self];
     }
-    [UIView animateWithDuration: 0.25 animations:^{
-        self.layer.affineTransform = CGAffineTransformMakeScale(0.1, 0.1);
-        self.alpha = 0;
-        _menuBackView.alpha = 0;
-    } completion:^(BOOL finished) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenuDidDismiss)]) {
-            [self.delegate ybPopupMenuDidDismiss];
+    __weak typeof(self) weakSelf = self;
+    [self.animationManager displayDismissAnimationCompletion:^{
+        __strong typeof(weakSelf)self = weakSelf;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenuDidDismiss:)]) {
+            [self.delegate ybPopupMenuDidDismiss:self];
         }
         self.delegate = nil;
         [self removeFromSuperview];
-        [_menuBackView removeFromSuperview];
+        [self.menuBackView removeFromSuperview];
     }];
 }
 
@@ -180,7 +157,7 @@ UITableViewDataSource
     static NSString * identifier = @"ybPopupMenu";
     YBPopupMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[YBPopupMenuCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+        cell = [[YBPopupMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.textLabel.numberOfLines = 0;
     }
     cell.backgroundColor = [UIColor clearColor];
@@ -218,11 +195,6 @@ UITableViewDataSource
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (_dismissOnSelected) [self dismiss];
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenuDidSelectedAtIndex:ybPopupMenu:)]) {
-        
-        [self.delegate ybPopupMenuDidSelectedAtIndex:indexPath.row ybPopupMenu:self];
-    }
-    
     if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenu:didSelectedAtIndex:)]) {
         [self.delegate ybPopupMenu:self didSelectedAtIndex:indexPath.row];
     }
@@ -258,23 +230,23 @@ UITableViewDataSource
 #pragma mark - privates
 - (void)show
 {
+    [self.orientationManager startMonitorDeviceOrientation];
+    [self updateUI];
     [YBMainWindow addSubview:_menuBackView];
     [YBMainWindow addSubview:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenuBeganShow:)]) {
+        [self.delegate ybPopupMenuBeganShow:self];
+    }
     if ([[self getLastVisibleCell] isKindOfClass:[YBPopupMenuCell class]]) {
         YBPopupMenuCell *cell = [self getLastVisibleCell];
         cell.isShowSeparator = NO;
     }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenuBeganShow)]) {
-        [self.delegate ybPopupMenuBeganShow];
-    }
-    self.layer.affineTransform = CGAffineTransformMakeScale(0.1, 0.1);
-    [UIView animateWithDuration: 0.25 animations:^{
-        self.layer.affineTransform = CGAffineTransformMakeScale(1.0, 1.0);
-        self.alpha = 1;
-        _menuBackView.alpha = 1;
-    } completion:^(BOOL finished) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenuDidShow)]) {
-            [self.delegate ybPopupMenuDidShow];
+    __weak typeof(self) weakSelf = self;
+    [self.animationManager displayShowAnimationCompletion:^{
+        __strong typeof(weakSelf)self = weakSelf;
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(ybPopupMenuDidShow:)]) {
+            [self.delegate ybPopupMenuDidShow:self];
         }
     }];
 }
@@ -304,14 +276,38 @@ UITableViewDataSource
     _itemHeight = 44;
     _isCornerChanged = NO;
     _showMaskView = YES;
+    _orientationManager = [YBPopupMenuDeviceOrientationManager manager];
+    _animationManager = [YBPopupMenuAnimationManager manager];
+    _animationManager.animationView = self;
     _menuBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, YBScreenWidth, YBScreenHeight)];
     _menuBackView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
-    _menuBackView.alpha = 0;
+    _menuBackView.alpha = 1;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(touchOutSide)];
     [_menuBackView addGestureRecognizer: tap];
-    self.alpha = 0;
+    self.alpha = 1;
     self.backgroundColor = [UIColor clearColor];
     [self addSubview:self.tableView];
+    
+    __weak typeof(self) weakSelf = self;
+    [_orientationManager setDeviceOrientDidChangeHandle:^(UIInterfaceOrientation orientation) {
+        __strong typeof(weakSelf)self = weakSelf;
+        if (orientation == UIInterfaceOrientationPortrait ||
+            orientation == UIInterfaceOrientationLandscapeLeft ||
+            orientation == UIInterfaceOrientationLandscapeRight)
+        {
+            if (self.relyView) {
+                //依赖view
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    //需要延迟加载才可以获取真实的frame，这里先做个标记，若有更合适的方法再替换
+                    [self calculateRealPointIfNeed];
+                    [self updateUI];
+                });
+            }else {
+                //依赖point
+                [self updateUI];
+            }
+        }
+    }];
 }
 
 - (UITableView *)tableView
@@ -342,6 +338,20 @@ UITableViewDataSource
     self.layer.shadowRadius = isShowShadow ? 2.0 : 0;
 }
 
+- (void)setRelyView:(UIView *)relyView
+{
+    _relyView = relyView;
+    [self calculateRealPointIfNeed];
+}
+
+- (void)calculateRealPointIfNeed
+{
+    CGRect absoluteRect = [_relyView convertRect:_relyView.bounds toView:YBMainWindow];
+    CGPoint relyPoint = CGPointMake(absoluteRect.origin.x + absoluteRect.size.width / 2, absoluteRect.origin.y + absoluteRect.size.height);
+    self.relyRect = absoluteRect;
+    self.point = relyPoint;
+}
+
 - (void)setShowMaskView:(BOOL)showMaskView
 {
     _showMaskView = showMaskView;
@@ -368,125 +378,21 @@ UITableViewDataSource
         }
             break;
     }
-    [self updateUI];
-}
-
-- (void)setFontSize:(CGFloat)fontSize
-{
-    _fontSize = fontSize;
-    [self.tableView reloadData];
-}
-
-- (void)setTextColor:(UIColor *)textColor
-{
-    _textColor = textColor;
-    [self.tableView reloadData];
-}
-
-- (void)setPoint:(CGPoint)point
-{
-    _point = point;
-    [self updateUI];
-}
-
-- (void)setItemWidth:(CGFloat)itemWidth
-{
-    _itemWidth = itemWidth;
-    [self updateUI];
-}
-
-- (void)setItemHeight:(CGFloat)itemHeight
-{
-    _itemHeight = itemHeight;
-    [self updateUI];
-}
-
-- (void)setBorderWidth:(CGFloat)borderWidth
-{
-    _borderWidth = borderWidth;
-    [self updateUI];
-}
-
-- (void)setBorderColor:(UIColor *)borderColor
-{
-    _borderColor = borderColor;
-    [self updateUI];
-}
-
-- (void)setArrowPosition:(CGFloat)arrowPosition
-{
-    _arrowPosition = arrowPosition;
-    [self updateUI];
-}
-
-- (void)setArrowWidth:(CGFloat)arrowWidth
-{
-    _arrowWidth = arrowWidth;
-    [self updateUI];
-}
-
-- (void)setArrowHeight:(CGFloat)arrowHeight
-{
-    _arrowHeight = arrowHeight;
-    [self updateUI];
-}
-
-- (void)setArrowDirection:(YBPopupMenuArrowDirection)arrowDirection
-{
-    _arrowDirection = arrowDirection;
-    [self updateUI];
-}
-
-- (void)setMaxVisibleCount:(NSInteger)maxVisibleCount
-{
-    _maxVisibleCount = maxVisibleCount;
-    [self updateUI];
-}
-
-- (void)setBackColor:(UIColor *)backColor
-{
-    _backColor = backColor;
-    [self updateUI];
 }
 
 - (void)setTitles:(NSArray *)titles
 {
     _titles = titles;
-    [self updateUI];
 }
 
 - (void)setImages:(NSArray *)images
 {
     _images = images;
-    [self updateUI];
-}
-
-- (void)setPriorityDirection:(YBPopupMenuPriorityDirection)priorityDirection
-{
-    _priorityDirection = priorityDirection;
-    [self updateUI];
-}
-
-- (void)setRectCorner:(UIRectCorner)rectCorner
-{
-    _rectCorner = rectCorner;
-    [self updateUI];
-}
-
-- (void)setCornerRadius:(CGFloat)cornerRadius
-{
-    _cornerRadius = cornerRadius;
-    [self updateUI];
-}
-
-- (void)setOffset:(CGFloat)offset
-{
-    _offset = offset;
-    [self updateUI];
 }
 
 - (void)updateUI
 {
+    _menuBackView.frame = CGRectMake(0, 0, YBScreenWidth, YBScreenHeight);
     CGFloat height;
     if (_titles.count > _maxVisibleCount) {
         height = _itemHeight * _maxVisibleCount + _borderWidth * 2;
@@ -701,15 +607,17 @@ UITableViewDataSource
 {
     if (_itemWidth == 0) return;
     
+    CGFloat menuHeight = [self getMenuTotalHeight];
+    
     CGPoint point = CGPointMake(0.5, 0.5);
     if (_arrowDirection == YBPopupMenuArrowDirectionTop) {
         point = CGPointMake(_arrowPosition / _itemWidth, 0);
     }else if (_arrowDirection == YBPopupMenuArrowDirectionBottom) {
         point = CGPointMake(_arrowPosition / _itemWidth, 1);
     }else if (_arrowDirection == YBPopupMenuArrowDirectionLeft) {
-        point = CGPointMake(0, (_itemHeight - _arrowPosition) / _itemHeight);
+        point = CGPointMake(0, _arrowPosition / menuHeight);
     }else if (_arrowDirection == YBPopupMenuArrowDirectionRight) {
-        point = CGPointMake(1, (_itemHeight - _arrowPosition) / _itemHeight);
+        point = CGPointMake(1, _arrowPosition / menuHeight);
     }
     CGRect originRect = self.frame;
     self.layer.anchorPoint = point;
@@ -721,6 +629,7 @@ UITableViewDataSource
     if (_priorityDirection == YBPopupMenuPriorityDirectionNone) {
         return;
     }
+    
     if (_arrowDirection == YBPopupMenuArrowDirectionTop || _arrowDirection == YBPopupMenuArrowDirectionBottom) {
         if (_point.x + _itemWidth / 2 > YBScreenWidth - _minSpace) {
             _arrowPosition = _itemWidth - (YBScreenWidth - _minSpace - _point.x);
@@ -731,14 +640,18 @@ UITableViewDataSource
         }
         
     }else if (_arrowDirection == YBPopupMenuArrowDirectionLeft || _arrowDirection == YBPopupMenuArrowDirectionRight) {
-//        if (_point.y + _itemHeight / 2 > YBScreenHeight - _minSpace) {
-//            _arrowPosition = _itemHeight - (YBScreenHeight - _minSpace - _point.y);
-//        }else if (_point.y < _itemHeight / 2 + _minSpace) {
-//            _arrowPosition = _point.y - _minSpace;
-//        }else {
-//            _arrowPosition = _itemHeight / 2;
-//        }
     }
+}
+
+- (CGFloat)getMenuTotalHeight
+{
+    CGFloat menuHeight = 0;
+    if (_titles.count > _maxVisibleCount) {
+        menuHeight = _itemHeight * _maxVisibleCount + _borderWidth * 2;
+    }else {
+        menuHeight = _itemHeight * _titles.count + _borderWidth * 2;
+    }
+    return menuHeight;
 }
 
 - (void)drawRect:(CGRect)rect
