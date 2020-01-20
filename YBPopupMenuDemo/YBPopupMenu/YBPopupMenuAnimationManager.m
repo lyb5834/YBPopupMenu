@@ -120,11 +120,13 @@ CAAnimationDelegate
 {
     if ([_animationView.layer animationForKey:YBShowAnimationKey] == anim) {
         [_animationView.layer removeAnimationForKey:YBShowAnimationKey];
+        _showAnimation.delegate = nil;
         if (_showAnimationHandle) {
             _showAnimationHandle();
         }
     }else if ([_animationView.layer animationForKey:YBDismissAnimationKey] == anim) {
         [_animationView.layer removeAnimationForKey:YBDismissAnimationKey];
+        _dismissAnimation.delegate = nil;
         if (_dismissAnimationHandle) {
             _dismissAnimationHandle();
         }

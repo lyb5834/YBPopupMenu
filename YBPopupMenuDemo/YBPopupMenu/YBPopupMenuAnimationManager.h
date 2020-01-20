@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger,YBPopupMenuAnimationStyle) {
  */
 @property CFTimeInterval duration;
 
-@property (nonatomic, strong) UIView * animationView;
+@property (nonatomic, weak) UIView * animationView;
 
 + (id <YBPopupMenuAnimationManager>)manager;
 
