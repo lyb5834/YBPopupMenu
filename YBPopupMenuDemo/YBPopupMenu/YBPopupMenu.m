@@ -162,7 +162,11 @@ UITableViewDataSource
     }
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = _textColor;
-    cell.textLabel.font = [UIFont systemFontOfSize:_fontSize];
+    if (_font) {
+        cell.textLabel.font = _font;
+    }else {
+        cell.textLabel.font = [UIFont systemFontOfSize:_fontSize];
+    }
     if ([_titles[indexPath.row] isKindOfClass:[NSAttributedString class]]) {
         cell.textLabel.attributedText = _titles[indexPath.row];
     }else if ([_titles[indexPath.row] isKindOfClass:[NSString class]]) {

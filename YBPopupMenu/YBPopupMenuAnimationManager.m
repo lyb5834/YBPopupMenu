@@ -35,15 +35,14 @@ CAAnimationDelegate
     return manager;
 }
 
-- (void)setStyle:(YBPopupMenuAnimationStyle)style
+- (void)configAnimation
 {
-    _style = style;
     CABasicAnimation * showAnimation;
     CABasicAnimation * dismissAnimation;
-    _showAnimation = _dismissAnimation = nil;
-    switch (style) {
+    switch (_style) {
         case YBPopupMenuAnimationStyleFade:
         {
+            _showAnimation = _dismissAnimation = nil;
             //show
             showAnimation = [self getBasicAnimationWithKeyPath:@"opacity"];
             showAnimation.fillMode = kCAFillModeBackwards;
@@ -61,9 +60,13 @@ CAAnimationDelegate
         case YBPopupMenuAnimationStyleCustom:
             break;
         case YBPopupMenuAnimationStyleNone:
+        {
+            _showAnimation = _dismissAnimation = nil;
+        }
             break;
         default:
         {
+            _showAnimation = _dismissAnimation = nil;
             //show
             showAnimation = [self getBasicAnimationWithKeyPath:@"transform.scale"];
             showAnimation.fillMode = kCAFillModeBackwards;
@@ -79,6 +82,30 @@ CAAnimationDelegate
         }
             break;
     }
+}
+
+- (void)setStyle:(YBPopupMenuAnimationStyle)style
+{
+    _style = style;
+    [self configAnimation];
+}
+
+- (void)setDuration:(CFTimeInterval)duration
+{
+    _duration = duration;
+    [self configAnimation];
+}
+
+- (void)setShowAnimation:(CAAnimation *)showAnimation
+{
+    _showAnimation = showAnimation;
+    [self configAnimation];
+}
+
+- (void)setDismissAnimation:(CAAnimation *)dismissAnimation
+{
+    _dismissAnimation = dismissAnimation;
+    [self configAnimation];
 }
 
 - (CABasicAnimation *)getBasicAnimationWithKeyPath:(NSString *)keyPath
@@ -121,12 +148,14 @@ CAAnimationDelegate
     if ([_animationView.layer animationForKey:YBShowAnimationKey] == anim) {
         [_animationView.layer removeAnimationForKey:YBShowAnimationKey];
         _showAnimation.delegate = nil;
+        _showAnimation = nil;
         if (_showAnimationHandle) {
             _showAnimationHandle();
         }
     }else if ([_animationView.layer animationForKey:YBDismissAnimationKey] == anim) {
         [_animationView.layer removeAnimationForKey:YBDismissAnimationKey];
         _dismissAnimation.delegate = nil;
+        _dismissAnimation = nil;
         if (_dismissAnimationHandle) {
             _dismissAnimationHandle();
         }

@@ -61,6 +61,7 @@
         popupMenu.delegate = self;
         popupMenu.offset = 10;
         popupMenu.type = YBPopupMenuTypeDark;
+        popupMenu.animationManager.style = YBPopupMenuAnimationStyleNone;
         popupMenu.rectCorner = UIRectCornerBottomLeft | UIRectCornerBottomRight;
     }];
 }
@@ -77,6 +78,7 @@
         popupMenu.tag = 100;
         //如果不加这句默认是 UITableViewCellSeparatorStyleNone 的
         popupMenu.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        
     }];
 }
 
