@@ -11,7 +11,7 @@
 
 #define YBScreenWidth [UIScreen mainScreen].bounds.size.width
 #define YBScreenHeight [UIScreen mainScreen].bounds.size.height
-#define YBMainWindow  [UIApplication sharedApplication].delegate.window
+#define YBMainWindow  [UIApplication sharedApplication].keyWindow
 #define YB_SAFE_BLOCK(BlockName, ...) ({ !BlockName ? nil : BlockName(__VA_ARGS__); })
 
 #pragma mark - /////////////

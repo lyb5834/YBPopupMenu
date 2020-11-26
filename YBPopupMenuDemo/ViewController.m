@@ -143,8 +143,8 @@
         popupMenu.dismissOnSelected = NO;
         popupMenu.borderColor = [UIColor brownColor];
         popupMenu.textColor = [UIColor brownColor];
-        popupMenu.animationManager.style = YBPopupMenuAnimationStyleFade;
-        popupMenu.animationManager.duration = 0.15;
+        popupMenu.animationManager.style = YBPopupMenuAnimationStyleNone;
+        popupMenu.animationManager.duration = 0.25;
     }];
     return YES;
 }
