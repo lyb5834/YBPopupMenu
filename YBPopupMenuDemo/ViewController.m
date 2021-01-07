@@ -39,6 +39,10 @@
         popupMenu.borderColor = [UIColor redColor];
         popupMenu.arrowPosition = 22;
     }];
+    //test dismiss all popupMenus
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [YBPopupMenu dismissAllPopupMenu];
+    });
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

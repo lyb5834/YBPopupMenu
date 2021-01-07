@@ -18,6 +18,8 @@ CAAnimationDelegate
 
 @property (nonatomic, copy) void (^dismissAnimationHandle) (void);
 
+@property (nonatomic, assign) BOOL isAnimating;
+
 @end
 
 @implementation YBPopupMenuAnimationManager
@@ -125,6 +127,8 @@ CAAnimationDelegate
         }
         return;
     }
+    if (self.isAnimating) return;
+    self.isAnimating = YES;
     _showAnimation.delegate = self;
     [_animationView.layer addAnimation:_showAnimation forKey:YBShowAnimationKey];
 }
@@ -138,6 +142,8 @@ CAAnimationDelegate
         }
         return;
     }
+    if (self.isAnimating) return;
+    self.isAnimating = YES;
     _dismissAnimation.delegate = self;
     [_animationView.layer addAnimation:_dismissAnimation forKey:YBDismissAnimationKey];
 }
@@ -149,6 +155,7 @@ CAAnimationDelegate
         [_animationView.layer removeAnimationForKey:YBShowAnimationKey];
         _showAnimation.delegate = nil;
         _showAnimation = nil;
+        _isAnimating = NO;
         if (_showAnimationHandle) {
             _showAnimationHandle();
         }
@@ -156,6 +163,7 @@ CAAnimationDelegate
         [_animationView.layer removeAnimationForKey:YBDismissAnimationKey];
         _dismissAnimation.delegate = nil;
         _dismissAnimation = nil;
+        _isAnimating = NO;
         if (_dismissAnimationHandle) {
             _dismissAnimationHandle();
         }

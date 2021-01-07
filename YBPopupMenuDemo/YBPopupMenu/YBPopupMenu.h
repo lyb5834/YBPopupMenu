@@ -240,8 +240,13 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
                   otherSettings:(void (^) (YBPopupMenu * popupMenu))otherSetting;
 
 /**
- 消失
+ 隐藏
  */
 - (void)dismiss;
+
+/**
+ 隐藏window上所有的popupMenu
+ */
++ (void)dismissAllPopupMenu;
 
 @end

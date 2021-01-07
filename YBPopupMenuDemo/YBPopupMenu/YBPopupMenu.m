@@ -137,6 +137,16 @@ UITableViewDataSource
     }];
 }
 
++ (void)dismissAllPopupMenu
+{
+    for (UIView * subView in YBMainWindow.subviews) {
+        if ([subView isKindOfClass:[YBPopupMenu class]]) {
+            YBPopupMenu * popupMenu = (YBPopupMenu *)subView;
+            [popupMenu dismiss];
+        }
+    }
+}
+
 #pragma mark tableViewDelegate & dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
