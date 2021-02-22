@@ -7,6 +7,7 @@ final class YBPopupMenuTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
 //        XCTAssertEqual(YBPopupMenu().text, "Hello, World!")
+        
     }
 
     static var allTests = [
