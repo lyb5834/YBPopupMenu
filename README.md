@@ -7,6 +7,8 @@
 # cocoapods支持
   * 只需在`Podfile`中加入`pod 'YBPopupMenu'`后`pod install`即可
 
+# SwiftPackage(SPM)支持
+
 # 最近更新
   * 修复了快速点击屏幕动画重复执行的问题
   * 增加了`dismissAllPopupMenu` 方法，方便一键隐藏所有popupMenu
