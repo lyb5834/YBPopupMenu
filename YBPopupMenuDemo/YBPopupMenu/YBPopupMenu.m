@@ -74,6 +74,9 @@ UITableViewDataSource
 >
 
 @property (nonatomic, strong) UIView      * menuBackView;
+@property (nonatomic, strong) YBPopupMenuContainerView * containerView;
+@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) UIVisualEffectView * effectView;
 @property (nonatomic) CGRect                relyRect;
 @property (nonatomic, assign) CGFloat       itemWidth;
 @property (nonatomic) CGPoint               point;
@@ -269,7 +272,7 @@ UITableViewDataSource
 {
     _cornerRadius = 5.0;
     _rectCorner = UIRectCornerAllCorners;
-    self.isShowShadow = YES;
+    self.showShadow = YES;
     _dismissOnSelected = YES;
     _dismissOnTouchOutside = YES;
     _fontSize = 15;
@@ -279,10 +282,11 @@ UITableViewDataSource
     _point = CGPointZero;
     _borderWidth = 0.0;
     _borderColor = [UIColor lightGrayColor];
-    _arrowWidth = 15.0;
-    _arrowHeight = 10.0;
+    _arrowWidth = 20.0;
+    _arrowHeight = 8.0;
     _backColor = [UIColor whiteColor];
     _type = YBPopupMenuTypeDefault;
+    _arrowStyle = YBPopupMenuArrowStyleCurve;
     _arrowDirection = YBPopupMenuArrowDirectionTop;
     _priorityDirection = YBPopupMenuPriorityDirectionTop;
     _minSpace = 10.0;
@@ -300,7 +304,9 @@ UITableViewDataSource
     [_menuBackView addGestureRecognizer: tap];
     self.alpha = 1;
     self.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.tableView];
+    [self addSubview:self.effectView];
+    [self addSubview:self.containerView];
+    [self.containerView addSubview:self.tableView];
     
     __weak typeof(self) weakSelf = self;
     [_orientationManager setDeviceOrientDidChangeHandle:^(UIInterfaceOrientation orientation) {
@@ -324,17 +330,21 @@ UITableViewDataSource
     }];
 }
 
-- (UITableView *)tableView
+- (void)configSettings
 {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor clearColor];
-        _tableView.tableFooterView = [UIView new];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
-    return _tableView;
+    self.containerView.rectCorner = _rectCorner;
+    self.containerView.cornerRadius = _cornerRadius;
+    self.containerView.borderWidth = _borderWidth;
+    self.containerView.borderColor = _borderColor;
+    self.containerView.backColor = _backColor;
+    self.containerView.arrowWidth = _arrowWidth;
+    self.containerView.arrowHeight = _arrowHeight;
+    self.containerView.arrowPosition = _arrowPosition;
+    self.containerView.arrowDirection = _arrowDirection;
+    self.containerView.arrowStyle = _arrowStyle;
+    [self.containerView setNeedsDisplay];
+    
+    self.effectView.layer.mask = [YBPopupMenuPath yb_maskLayerWithRect:self.effectView.frame rectCorner:_rectCorner cornerRadius:_cornerRadius arrowWidth:_arrowWidth arrowHeight:_arrowHeight arrowPosition:_arrowPosition arrowDirection:_arrowDirection arrowStyle:_arrowStyle];
 }
 
 - (void)touchOutSide
@@ -344,12 +354,13 @@ UITableViewDataSource
     }
 }
 
-- (void)setIsShowShadow:(BOOL)isShowShadow
+- (void)setShowShadow:(BOOL)showShadow
 {
-    _isShowShadow = isShowShadow;
-    self.layer.shadowOpacity = isShowShadow ? 0.5 : 0;
+    _showShadow = showShadow;
+    self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    self.layer.shadowOpacity = showShadow ? 0.5 : 0;
     self.layer.shadowOffset = CGSizeMake(0, 0);
-    self.layer.shadowRadius = isShowShadow ? 2.0 : 0;
+    self.layer.shadowRadius = showShadow ? 4.0 : 0;
 }
 
 - (void)setRelyView:(UIView *)relyView
@@ -497,7 +508,7 @@ UITableViewDataSource
     [self setAnchorPoint];
     [self setOffset];
     [self.tableView reloadData];
-    [self setNeedsDisplay];
+    [self configSettings];
 }
 
 - (void)setRelyRect
@@ -529,6 +540,8 @@ UITableViewDataSource
     }else if (_arrowDirection == YBPopupMenuArrowDirectionRight) {
         self.tableView.frame = CGRectMake(_borderWidth , _borderWidth , frame.size.width - _borderWidth * 2 - _arrowHeight, frame.size.height);
     }
+    self.effectView.frame = self.bounds;
+    self.containerView.frame = self.bounds;
 }
 
 - (void)changeRectCorner
@@ -668,11 +681,36 @@ UITableViewDataSource
     return menuHeight;
 }
 
-- (void)drawRect:(CGRect)rect
+#pragma mark - lazyloads
+- (UITableView *)tableView
 {
-    UIBezierPath *bezierPath = [YBPopupMenuPath yb_bezierPathWithRect:rect rectCorner:_rectCorner cornerRadius:_cornerRadius borderWidth:_borderWidth borderColor:_borderColor backgroundColor:_backColor arrowWidth:_arrowWidth arrowHeight:_arrowHeight arrowPosition:_arrowPosition arrowDirection:_arrowDirection];
-    [bezierPath fill];
-    [bezierPath stroke];
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.tableFooterView = [UIView new];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    return _tableView;
+}
+
+- (YBPopupMenuContainerView *)containerView
+{
+    if (!_containerView) {
+        _containerView = [[YBPopupMenuContainerView alloc] init];
+        _containerView.backgroundColor = [UIColor clearColor];
+    }
+    return _containerView;
+}
+
+- (UIVisualEffectView *)effectView
+{
+    if (!_effectView) {
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        _effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    }
+    return _effectView;
 }
 
 @end

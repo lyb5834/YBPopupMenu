@@ -10,7 +10,6 @@
 		0C660A231FEA39E7000BD9A5 /* CustomTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C660A211FEA39E7000BD9A5 /* CustomTestCell.m */; };
 		0C660A241FEA39E7000BD9A5 /* CustomTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C660A221FEA39E7000BD9A5 /* CustomTestCell.xib */; };
 		0C8A9ACF1EC555BE002F22E1 /* YBPopupMenuPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8A9ACC1EC555BE002F22E1 /* YBPopupMenuPath.m */; };
-		0C8A9AD01EC555BE002F22E1 /* YBRectConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8A9ACE1EC555BE002F22E1 /* YBRectConst.m */; };
 		0C8E6EC21DD1A893009EEF02 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EC11DD1A893009EEF02 /* main.m */; };
 		0C8E6EC51DD1A893009EEF02 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EC41DD1A893009EEF02 /* AppDelegate.m */; };
 		0C8E6EC81DD1A893009EEF02 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EC71DD1A893009EEF02 /* ViewController.m */; };
@@ -19,6 +18,7 @@
 		0C8E6ED01DD1A893009EEF02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C8E6ECE1DD1A893009EEF02 /* LaunchScreen.storyboard */; };
 		0C8E6EDB1DD1A893009EEF02 /* YBPopupMenuDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EDA1DD1A893009EEF02 /* YBPopupMenuDemoUITests.m */; };
 		0C8E6EE81DD1A8CF009EEF02 /* YBPopupMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8E6EE71DD1A8CF009EEF02 /* YBPopupMenu.m */; };
+		4A07B8382A8CBF1B00B0AF85 /* YBPopupMenuContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A07B8372A8CBF1B00B0AF85 /* YBPopupMenuContainerView.m */; };
 		4AD7633C23D42170006AEBE5 /* YBPopupMenuDeviceOrientationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD7633B23D42170006AEBE5 /* YBPopupMenuDeviceOrientationManager.m */; };
 		4AD7634223D46E77006AEBE5 /* YBPopupMenuAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD7634123D46E77006AEBE5 /* YBPopupMenuAnimationManager.m */; };
 /* End PBXBuildFile section */
@@ -39,8 +39,6 @@
 		0C660A221FEA39E7000BD9A5 /* CustomTestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTestCell.xib; sourceTree = "<group>"; };
 		0C8A9ACB1EC555BE002F22E1 /* YBPopupMenuPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBPopupMenuPath.h; sourceTree = "<group>"; };
 		0C8A9ACC1EC555BE002F22E1 /* YBPopupMenuPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBPopupMenuPath.m; sourceTree = "<group>"; };
-		0C8A9ACD1EC555BE002F22E1 /* YBRectConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBRectConst.h; sourceTree = "<group>"; };
-		0C8A9ACE1EC555BE002F22E1 /* YBRectConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBRectConst.m; sourceTree = "<group>"; };
 		0C8E6EBD1DD1A893009EEF02 /* YBPopupMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YBPopupMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C8E6EC11DD1A893009EEF02 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0C8E6EC31DD1A893009EEF02 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -56,6 +54,8 @@
 		0C8E6EDC1DD1A893009EEF02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C8E6EE61DD1A8CF009EEF02 /* YBPopupMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBPopupMenu.h; sourceTree = "<group>"; };
 		0C8E6EE71DD1A8CF009EEF02 /* YBPopupMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBPopupMenu.m; sourceTree = "<group>"; };
+		4A07B8362A8CBF1B00B0AF85 /* YBPopupMenuContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBPopupMenuContainerView.h; sourceTree = "<group>"; };
+		4A07B8372A8CBF1B00B0AF85 /* YBPopupMenuContainerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBPopupMenuContainerView.m; sourceTree = "<group>"; };
 		4AD7633A23D42170006AEBE5 /* YBPopupMenuDeviceOrientationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBPopupMenuDeviceOrientationManager.h; sourceTree = "<group>"; };
 		4AD7633B23D42170006AEBE5 /* YBPopupMenuDeviceOrientationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBPopupMenuDeviceOrientationManager.m; sourceTree = "<group>"; };
 		4AD7634023D46E77006AEBE5 /* YBPopupMenuAnimationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBPopupMenuAnimationManager.h; sourceTree = "<group>"; };
@@ -140,14 +140,14 @@
 			children = (
 				0C8E6EE61DD1A8CF009EEF02 /* YBPopupMenu.h */,
 				0C8E6EE71DD1A8CF009EEF02 /* YBPopupMenu.m */,
-				0C8A9ACB1EC555BE002F22E1 /* YBPopupMenuPath.h */,
-				0C8A9ACC1EC555BE002F22E1 /* YBPopupMenuPath.m */,
-				0C8A9ACD1EC555BE002F22E1 /* YBRectConst.h */,
-				0C8A9ACE1EC555BE002F22E1 /* YBRectConst.m */,
-				4AD7633A23D42170006AEBE5 /* YBPopupMenuDeviceOrientationManager.h */,
-				4AD7633B23D42170006AEBE5 /* YBPopupMenuDeviceOrientationManager.m */,
 				4AD7634023D46E77006AEBE5 /* YBPopupMenuAnimationManager.h */,
 				4AD7634123D46E77006AEBE5 /* YBPopupMenuAnimationManager.m */,
+				4A07B8362A8CBF1B00B0AF85 /* YBPopupMenuContainerView.h */,
+				4A07B8372A8CBF1B00B0AF85 /* YBPopupMenuContainerView.m */,
+				4AD7633A23D42170006AEBE5 /* YBPopupMenuDeviceOrientationManager.h */,
+				4AD7633B23D42170006AEBE5 /* YBPopupMenuDeviceOrientationManager.m */,
+				0C8A9ACB1EC555BE002F22E1 /* YBPopupMenuPath.h */,
+				0C8A9ACC1EC555BE002F22E1 /* YBPopupMenuPath.m */,
 			);
 			path = YBPopupMenu;
 			sourceTree = "<group>";
@@ -201,7 +201,7 @@
 				TargetAttributes = {
 					0C8E6EBC1DD1A893009EEF02 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 76NVUL9XC6;
+						DevelopmentTeam = 8CSXJZUPG2;
 						ProvisioningStyle = Automatic;
 					};
 					0C8E6ED51DD1A893009EEF02 = {
@@ -261,8 +261,8 @@
 				0C8E6EE81DD1A8CF009EEF02 /* YBPopupMenu.m in Sources */,
 				0C8A9ACF1EC555BE002F22E1 /* YBPopupMenuPath.m in Sources */,
 				0C660A231FEA39E7000BD9A5 /* CustomTestCell.m in Sources */,
+				4A07B8382A8CBF1B00B0AF85 /* YBPopupMenuContainerView.m in Sources */,
 				4AD7633C23D42170006AEBE5 /* YBPopupMenuDeviceOrientationManager.m in Sources */,
-				0C8A9AD01EC555BE002F22E1 /* YBRectConst.m in Sources */,
 				4AD7634223D46E77006AEBE5 /* YBPopupMenuAnimationManager.m in Sources */,
 				0C8E6EC81DD1A893009EEF02 /* ViewController.m in Sources */,
 				0C8E6EC51DD1A893009EEF02 /* AppDelegate.m in Sources */,
@@ -400,7 +400,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 76NVUL9XC6;
+				DEVELOPMENT_TEAM = 8CSXJZUPG2;
 				INFOPLIST_FILE = YBPopupMenuDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -413,7 +413,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 76NVUL9XC6;
+				DEVELOPMENT_TEAM = 8CSXJZUPG2;
 				INFOPLIST_FILE = YBPopupMenuDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -38,9 +38,10 @@
         popupMenu.borderWidth = 1;
         popupMenu.borderColor = [UIColor redColor];
         popupMenu.arrowPosition = 22;
+        popupMenu.backColor = [UIColor clearColor];
     }];
     //test dismiss all popupMenus
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [YBPopupMenu dismissAllPopupMenu];
     });
 }
@@ -61,10 +62,15 @@
 {
     [YBPopupMenu showAtPoint:point titles:TITLES icons:nil menuWidth:110 otherSettings:^(YBPopupMenu *popupMenu) {
         popupMenu.dismissOnSelected = NO;
-        popupMenu.isShowShadow = YES;
+        popupMenu.showShadow = YES;
         popupMenu.delegate = self;
         popupMenu.offset = 10;
         popupMenu.type = YBPopupMenuTypeDark;
+        popupMenu.arrowStyle = YBPopupMenuArrowStyleStraight;
+        popupMenu.arrowWidth = 15;
+        popupMenu.arrowHeight = 10;
+        popupMenu.backColor = [UIColor clearColor];
+        popupMenu.effectView.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
         popupMenu.animationManager.style = YBPopupMenuAnimationStyleNone;
         popupMenu.rectCorner = UIRectCornerBottomLeft | UIRectCornerBottomRight;
     }];
@@ -74,11 +80,12 @@
 {
     [YBPopupMenu showAtPoint:point titles:TITLES icons:nil menuWidth:110 otherSettings:^(YBPopupMenu *popupMenu) {
         popupMenu.dismissOnSelected = YES;
-        popupMenu.isShowShadow = YES;
+        popupMenu.showShadow = YES;
         popupMenu.delegate = self;
         popupMenu.type = YBPopupMenuTypeDefault;
         popupMenu.cornerRadius = 8;
         popupMenu.rectCorner = UIRectCornerTopLeft| UIRectCornerTopRight;
+        popupMenu.backColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
         popupMenu.tag = 100;
         //如果不加这句默认是 UITableViewCellSeparatorStyleNone 的
         popupMenu.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;

@@ -16,6 +16,11 @@ typedef NS_ENUM(NSInteger, YBPopupMenuArrowDirection) {
     YBPopupMenuArrowDirectionNone      //没有箭头
 };
 
+typedef NS_ENUM(NSInteger, YBPopupMenuArrowStyle) {
+    YBPopupMenuArrowStyleCurve = 0,    //曲线箭头
+    YBPopupMenuArrowStyleStraight,     //直线箭头
+};
+
 @interface YBPopupMenuPath : NSObject
 
 + (CAShapeLayer *)yb_maskLayerWithRect:(CGRect)rect
@@ -24,7 +29,8 @@ typedef NS_ENUM(NSInteger, YBPopupMenuArrowDirection) {
                             arrowWidth:(CGFloat)arrowWidth
                            arrowHeight:(CGFloat)arrowHeight
                          arrowPosition:(CGFloat)arrowPosition
-                        arrowDirection:(YBPopupMenuArrowDirection)arrowDirection;
+                        arrowDirection:(YBPopupMenuArrowDirection)arrowDirection
+                            arrowStyle:(YBPopupMenuArrowStyle)arrowStyle;
 
 + (UIBezierPath *)yb_bezierPathWithRect:(CGRect)rect
                              rectCorner:(UIRectCorner)rectCorner
@@ -35,5 +41,6 @@ typedef NS_ENUM(NSInteger, YBPopupMenuArrowDirection) {
                              arrowWidth:(CGFloat)arrowWidth
                             arrowHeight:(CGFloat)arrowHeight
                           arrowPosition:(CGFloat)arrowPosition
-                         arrowDirection:(YBPopupMenuArrowDirection)arrowDirection;
+                         arrowDirection:(YBPopupMenuArrowDirection)arrowDirection
+                             arrowStyle:(YBPopupMenuArrowStyle)arrowStyle;
 @end
