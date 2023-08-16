@@ -10,6 +10,7 @@
 #import "YBPopupMenuPath.h"
 #import "YBPopupMenuDeviceOrientationManager.h"
 #import "YBPopupMenuAnimationManager.h"
+#import "YBPopupMenuContainerView.h"
 
 // 过期提醒
 #define YBDeprecated(instead) NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, instead)
@@ -73,7 +74,17 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
 /**
  tableView  Default separatorStyle is UITableViewCellSeparatorStyleNone
  */
-@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong, readonly) UITableView * tableView;
+
+
+@property (nonatomic, strong, readonly) YBPopupMenuContainerView * containerView;
+
+/**
+ 高斯模糊视图 backColor 有 alpha时生效
+ 
+ exp: popupMenu.backColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+ */
+@property (nonatomic, strong, readonly) UIVisualEffectView * effectView;
 
 /**
  圆角半径 Default is 5.0
@@ -90,7 +101,7 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
 /**
  是否显示阴影 Default is YES
  */
-@property (nonatomic, assign , getter=isShadowShowing) BOOL isShowShadow;
+@property (nonatomic, assign , getter=isShowShadow) BOOL showShadow;
 
 /**
  是否显示灰色覆盖层 Default is YES
@@ -142,12 +153,12 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
 @property (nonatomic, strong) UIColor * borderColor;
 
 /**
- 箭头宽度 Default is 15
+ 箭头宽度 Default is 20
  */
 @property (nonatomic, assign) CGFloat arrowWidth;
 
 /**
- 箭头高度 Default is 10
+ 箭头高度 Default is 8
  */
 @property (nonatomic, assign) CGFloat arrowHeight;
 
@@ -164,6 +175,11 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
 @property (nonatomic, assign) YBPopupMenuArrowDirection arrowDirection;
 
 /**
+ 箭头类型 Default is YBPopupMenuArrowStyleCurve
+ */
+@property (nonatomic, assign) YBPopupMenuArrowStyle arrowStyle;
+
+/**
  箭头优先方向 Default is YBPopupMenuPriorityDirectionTop
  
  当控件超出屏幕时会自动调整箭头位置
@@ -176,7 +192,7 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
 @property (nonatomic, assign) NSInteger maxVisibleCount;
 
 /**
- menu背景色 自定义cell时忽略 Default is WhiteColor
+ menu背景色 如果color有alpha就会显示effectView Default is WhiteColor
  */
 @property (nonatomic, strong) UIColor * backColor;
 
