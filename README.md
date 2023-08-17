@@ -10,11 +10,18 @@
 # SwiftPackageManager(SPM)支持
 
 # 最近更新
-  * 修复了快速点击屏幕动画重复执行的问题
-  * 增加了`dismissAllPopupMenu` 方法，方便一键隐藏所有popupMenu
+* 新增箭头样式
+
+| 样式 | 图例 |
+|------|------|
+| `YBPopupMenuArrowStyleCurve` **默认** | ![curve](https://lyb5834.github.io/Images/curve_arrow.png) |
+| `YBPopupMenuArrowStyleStraight` | ![straight](https://lyb5834.github.io/Images/straight_arrow.png) |
+
+* 增加了高斯模糊视图
 
 # 之前更新
-
+  * 修复了快速点击屏幕动画重复执行的问题
+  * 增加了`dismissAllPopupMenu` 方法，方便一键隐藏所有popupMenu
   * 删除老版初始化方法，避免频繁调用`[self updateUI]`方法
   * 增加横竖屏适配
   * 增加可选择的动画，暂时只有`YBPopupMenuAnimationStyleScale` 和 `YBPopupMenuAnimationStyleFade`两种，可自定义
@@ -33,16 +40,17 @@
 
 # 使用方法
   * `#import "YBPopupMenu.h"`
+  
   ```
   [YBPopupMenu showAtPoint:p titles:TITLES icons:nil menuWidth:110 otherSettings:^(YBPopupMenu *popupMenu) {
         popupMenu.dismissOnSelected = NO;
-        popupMenu.isShowShadow = YES;
+        popupMenu.showShadow = YES;
         popupMenu.delegate = self;
         popupMenu.offset = 10;
         popupMenu.type = YBPopupMenuTypeDark;
         popupMenu.rectCorner = UIRectCornerBottomLeft | UIRectCornerBottomRight;
         popupMenu...;
-    }];
+    }]; 
   ```
 
 
