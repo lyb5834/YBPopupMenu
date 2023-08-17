@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -62,14 +63,62 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DA6-6w-Ojz">
                                 <rect key="frame" x="57.5" y="239.5" width="260" height="188"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twZ-8I-ngd">
-                                        <rect key="frame" x="100" y="64" width="60" height="60"/>
+                                    <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R6p-XM-mC3">
+                                        <rect key="frame" x="45" y="72" width="44" height="44"/>
                                         <color key="backgroundColor" red="1" green="0.3916847618" blue="0.2979644991" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="O7D-xa-iCy"/>
-                                            <constraint firstAttribute="height" constant="60" id="dyA-IV-tZG"/>
+                                            <constraint firstAttribute="height" constant="44" id="41M-2X-Qzz"/>
+                                            <constraint firstAttribute="width" constant="44" id="rsl-3b-l38"/>
                                         </constraints>
-                                        <state key="normal" title="测试">
+                                        <state key="normal" title="右">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onTestClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CuH-Wz-mGf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l2g-cL-256">
+                                        <rect key="frame" x="108" y="21" width="44" height="44"/>
+                                        <color key="backgroundColor" red="1" green="0.3916847618" blue="0.2979644991" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="3Vy-s5-XUC"/>
+                                            <constraint firstAttribute="height" constant="44" id="qbM-h9-CxY"/>
+                                        </constraints>
+                                        <state key="normal" title="下">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onTestClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3rr-jy-AP0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHU-y1-rX1">
+                                        <rect key="frame" x="108" y="123" width="44" height="44"/>
+                                        <color key="backgroundColor" red="1" green="0.3916847618" blue="0.2979644991" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="00k-bI-9CZ"/>
+                                            <constraint firstAttribute="height" constant="44" id="ex8-cn-QmE"/>
+                                        </constraints>
+                                        <state key="normal" title="上">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onTestClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="r3Q-Ky-B7K"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="箭头方向" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Bj-tc-L1i">
+                                        <rect key="frame" x="99" y="85" width="62" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" systemColor="systemPurpleColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twZ-8I-ngd">
+                                        <rect key="frame" x="171" y="72" width="44" height="44"/>
+                                        <color key="backgroundColor" red="1" green="0.3916847618" blue="0.2979644991" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="38c-4E-tes"/>
+                                            <constraint firstAttribute="height" constant="44" id="aKo-jw-xnO"/>
+                                        </constraints>
+                                        <state key="normal" title="左">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -79,10 +128,18 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.99640788449999995" blue="0.77765260199999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="twZ-8I-ngd" firstAttribute="centerY" secondItem="DA6-6w-Ojz" secondAttribute="centerY" id="59f-fI-Rfm"/>
                                     <constraint firstAttribute="height" constant="188" id="9QF-5b-YzO"/>
-                                    <constraint firstItem="twZ-8I-ngd" firstAttribute="centerX" secondItem="DA6-6w-Ojz" secondAttribute="centerX" id="tyx-7a-Wzw"/>
+                                    <constraint firstItem="3Bj-tc-L1i" firstAttribute="centerX" secondItem="DA6-6w-Ojz" secondAttribute="centerX" id="9cY-lu-ybE"/>
+                                    <constraint firstItem="3Bj-tc-L1i" firstAttribute="leading" secondItem="R6p-XM-mC3" secondAttribute="trailing" constant="10" id="BfF-ii-X7j"/>
+                                    <constraint firstItem="l2g-cL-256" firstAttribute="centerX" secondItem="DA6-6w-Ojz" secondAttribute="centerX" id="EDG-ws-yhl"/>
+                                    <constraint firstItem="AHU-y1-rX1" firstAttribute="centerX" secondItem="DA6-6w-Ojz" secondAttribute="centerX" id="Ecv-VU-Z9b"/>
+                                    <constraint firstItem="R6p-XM-mC3" firstAttribute="centerY" secondItem="DA6-6w-Ojz" secondAttribute="centerY" id="SY5-js-cLo"/>
+                                    <constraint firstItem="3Bj-tc-L1i" firstAttribute="top" secondItem="l2g-cL-256" secondAttribute="bottom" constant="20" id="UzB-iu-PaN"/>
+                                    <constraint firstItem="twZ-8I-ngd" firstAttribute="leading" secondItem="3Bj-tc-L1i" secondAttribute="trailing" constant="10" id="WUA-0p-b7u"/>
+                                    <constraint firstItem="AHU-y1-rX1" firstAttribute="top" secondItem="3Bj-tc-L1i" secondAttribute="bottom" constant="20" id="sys-Jo-JaZ"/>
+                                    <constraint firstItem="twZ-8I-ngd" firstAttribute="centerY" secondItem="DA6-6w-Ojz" secondAttribute="centerY" id="u7O-MO-BaJ"/>
                                     <constraint firstAttribute="width" constant="260" id="v66-s9-c0F"/>
+                                    <constraint firstItem="3Bj-tc-L1i" firstAttribute="centerY" secondItem="DA6-6w-Ojz" secondAttribute="centerY" id="z9w-cx-smG"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="测试按钮在子视图上" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkT-N9-MEe">
@@ -147,4 +204,9 @@
             <point key="canvasLocation" x="117.59999999999999" y="114.69265367316342"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

@@ -34,16 +34,17 @@
 
 - (IBAction)onTestClick:(UIButton *)sender {
     [YBPopupMenu showRelyOnView:sender titles:@[@"111",@"222",@"333",@"444",@"555",@"666",@"777",@"888"] icons:nil menuWidth:100 otherSettings:^(YBPopupMenu *popupMenu) {
-        popupMenu.priorityDirection = YBPopupMenuPriorityDirectionLeft;
+        popupMenu.priorityDirection = sender.tag - 100;
         popupMenu.borderWidth = 1;
-        popupMenu.borderColor = [UIColor redColor];
+        popupMenu.borderColor = [[UIColor redColor] colorWithAlphaComponent:0.7];
         popupMenu.arrowPosition = 22;
+        // 要显示高斯模糊效果，backColor 要设置透明色或者带alpha的颜色
         popupMenu.backColor = [UIColor clearColor];
     }];
     //test dismiss all popupMenus
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [YBPopupMenu dismissAllPopupMenu];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [YBPopupMenu dismissAllPopupMenu];
+//    });
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
