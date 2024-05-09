@@ -10,5 +10,5 @@ Pod::Spec.new do |s|
   s.source_files  = "YBPopupMenu/*.{h,m}"
   s.resource_bundles = {"YBPopupMenu" => ["YBPopupMenu/PrivacyInfo.xcprivacy"]}
   s.requires_arc = true
-  s.platform     = :ios, '7.0'
+  s.platform     = :ios, '9.0'
 end
