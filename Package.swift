@@ -14,8 +14,9 @@ let package = Package(
     targets: [
         .target(
             name: "YBPopupMenu",
+            dependencies: [],
             path: "YBPopupMenu",
-            publicHeadersPath : ""
+            resources: [.copy("PrivacyInfo.xcprivacy")]
         )
     ]
 )
