@@ -29,6 +29,7 @@
 - (IBAction)onPopupClick:(UIButton *)sender {
     [YBPopupMenu showRelyOnView:sender titles:TITLES icons:ICONS menuWidth:120 otherSettings:^(YBPopupMenu *popupMenu) {
         popupMenu.delegate = self;
+        popupMenu.maskColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     }];
 }
 

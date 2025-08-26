@@ -109,6 +109,11 @@ typedef NS_ENUM(NSInteger , YBPopupMenuPriorityDirection) {
 @property (nonatomic, assign) BOOL showMaskView;
 
 /**
+ 半透明背景色 showMaskView = NO 时无效 Default is  [[UIColor blackColor] colorWithAlphaComponent:0.1]
+ */
+@property (nonatomic, strong) UIColor * maskColor;
+
+/**
  选择菜单项后消失 Default is YES
  */
 @property (nonatomic, assign) BOOL dismissOnSelected;
